@@ -1,0 +1,41 @@
+{
+  "name": "ui-confidential-erc1155",
+  "version": "1.0.0",
+  "description": "UI to interact with smartcontract ConfidentialERC1155",
+  "main": "index.ts",
+  "scripts": {
+    "start": "webpack-dev-server .",
+    "build": "webpack .",
+    "test": "test"
+  },
+  "author": "M-Bln",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.4",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.1",
+    "@babel/runtime": "^7.24.4",
+    "@types/react": "^18.2.75",
+    "@types/react-dom": "^18.2.24",
+    "babel-loader": "^9.1.3",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^28.2.0",
+    "path": "^0.12.7",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "wagmi": "^2.5.19"
+  }
+}
