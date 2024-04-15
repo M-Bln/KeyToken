@@ -26,8 +26,22 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
     //         setInstance(await newInstance);
     //     });
     // }, [provider, signer]);
-
-    return (
-        <MintNFT/>
-    );
+    if (instance) {
+        return (
+            <MintNFT instance={instance}/>
+        );
+    } else {
+        return(
+            <div>Failed to initiate instance</div>
+        )
+    }
+    // if (instance) {
+    //     return (
+    //         <MintNFT instance={instance}/>
+    //     );
+    // } else {
+    //     return(
+    //         {provider && signer && <ConnectToFhevm provider={provider}  signer={signer} />}
+    //     )
+    // }
 };

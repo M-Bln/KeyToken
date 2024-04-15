@@ -63,20 +63,22 @@ module.exports={
         fallback: {
           "crypto": require.resolve("crypto-browserify"),
           "vm": require.resolve("vm-browserify"),
-          "stream": require.resolve("stream-browserify")
+          "stream": require.resolve("stream-browserify"),
+          "tfhe_bg.wasm": require.resolve('tfhe/tfhe_bg.wasm'),
+          "node-tfhe": require.resolve("tfhe/tfhe")
         },
-        alias: {
-          'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/tfhe_bg.wasm'),
-           // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node/tfhe.js'),
-           // 'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node-tfhe/tfhe_bg.wasm'),
-           // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/wbg'),
-        }, // Hacky fix to find the tfhe_bg.wasm
+        // alias: {
+        //   'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/tfhe_bg.wasm'),
+        //    // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node/tfhe.js'),
+        //    // 'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node-tfhe/tfhe_bg.wasm'),
+        //    // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/wbg'),
+        // }, // Hacky fix to find the tfhe_bg.wasm
         // alias: { 
         //   'tfhe_bg.wasm$': path.resolve(__dirname, '/home/mlnd42/Documents/programming/front/ui-confidential-erc1155/node_modules/.pnpm/fhevmjs@0.4.0/node_modules/tfhe/tfhe_bg.wasm'),
         // }, // Hacky fix to find the tfhe_bg.wasm when using pnpm
     },
     experiments: {
-      asyncWebAssembly: true,
+      syncWebAssembly: true,
     },
     // module:{
     //     /** "rules"

@@ -29,18 +29,43 @@ export const createFhevmInstance = async (contractAddress: string, account: Sign
     }
 
     if (publicKey) {
-      const instance = await createInstance({ chainId, publicKey });
+      // Return a new Promise
+      return new Promise<FhevmInstance>(async (resolve, reject) => {
+        // Wait for 2 seconds before creating the instance
+        setTimeout(async () => {
+          try {
+            const instance = await createInstance({ chainId, publicKey: publicKey! });
 
-      try {
-        await generatePublicKey(contractAddress, account, instance);
-      } catch (e) {
-        console.error("Error generating public key:", e);
-      }
-      return instance;
+            try {
+              await generatePublicKey(contractAddress, account, instance);
+            } catch (e) {
+              console.error("Error generating public key:", e);
+            }
+            // Resolve the Promise with the instance
+            resolve(instance);
+          } catch (e) {
+            // Reject the Promise with the error
+            reject(e);
+          }
+        }, 2000);
+      });
     } else {  
       console.error("Public key is undefined");
       throw new Error("Public key is undefined");
     }
+    // if (publicKey) {
+    //   const instance = await createInstance({ chainId, publicKey });
+
+    //   try {
+    //     await generatePublicKey(contractAddress, account, instance);
+    //   } catch (e) {
+    //     console.error("Error generating public key:", e);
+    //   }
+    //   return instance;
+    // } else {  
+    //   console.error("Public key is undefined");
+    //   throw new Error("Public key is undefined");
+    // }
   } catch (e) {
     console.error("Error creating Fhevm instance:", e);
   }

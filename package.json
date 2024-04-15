@@ -36,11 +36,10 @@
   "dependencies": {
     "crypto-browserify": "^3.12.0",
     "ethers": "^6.11.1",
-    "fhevmjs": "^0.3.2",
+    "fhevmjs": "^0.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "stream-browserify": "^3.0.0",
-    "tfhe": "^0.6.1",
     "vm-browserify": "^1.1.2",
     "wagmi": "^2.5.19",
     "wasm-pack": "^0.12.1"
