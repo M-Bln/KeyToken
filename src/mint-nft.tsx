@@ -25,13 +25,16 @@ export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
     const formData = new FormData(e.target as HTMLFormElement) 
     const tokenId = formData.get('tokenId') as string
     const address = formData.get('address') as string 
-    const clearData = formData.get('data') as unknown as number
+    const clearData = BigInt(formData.get('data') as string)
+    console.log(clearData)
     const encryptedData = instance?.encrypt32(clearData)
+    const encryptedDataHex = toHexString(encryptedData ?? new Uint8Array())
+    console.log(encryptedDataHex)
     writeContract({
       address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
       abi,
       functionName: 'mintWithConfidentialData',
-      args: [address, BigInt(tokenId), BigInt(1), '0x', encryptedData],
+      args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
     })
   } 
 
@@ -56,8 +59,12 @@ export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
       {isConfirming && <div>Waiting for confirmation...</div>} 
       {isConfirmed && <div>Transaction confirmed.</div>} 
       {error && ( 
-        <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
+        <div>Error: {(error as BaseError).details || error.message}</div> 
       )} 
     </form>
   )
+}
+
+function toHexString(byteArray: Uint8Array) {
+  return '0x' + Array.from(byteArray, byte => ('0' + (byte & 0xFF).toString(16)).slice(-2)).join('');
 }
