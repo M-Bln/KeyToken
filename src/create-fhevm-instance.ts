@@ -5,7 +5,7 @@ import { FhevmInstance, createInstance} from "fhevmjs";
 export const FHE_LIB_ADDRESS = "0x000000000000000000000000000000000000005d";
 
 
-const HARDHAT_NETWORK = process.env.HARDHAT_NETWORK;
+// const HARDHAT_NETWORK = process.env.HARDHAT_NETWORK;
 
 let publicKey: string | undefined;
 let chainId: number;
