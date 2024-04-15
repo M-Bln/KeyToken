@@ -59,7 +59,24 @@ module.exports={
          * resolve the one with the extension listed first in the array and skip the rest. 
          * This is what enables users to leave off the extension when importing
          */
-        extensions: ['.ts','.js','.tsx','.jsx','.json'] 
+        extensions: ['.ts','.js','.tsx','.jsx','.json'],
+        fallback: {
+          "crypto": require.resolve("crypto-browserify"),
+          "vm": require.resolve("vm-browserify"),
+          "stream": require.resolve("stream-browserify")
+        },
+        alias: {
+          'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/tfhe_bg.wasm'),
+           // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node/tfhe.js'),
+           // 'tfhe_bg.wasm$': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/node-tfhe/tfhe_bg.wasm'),
+           // 'wbg': path.resolve(__dirname, 'node_modules/fhevmjs/node_modules/tfhe/wbg'),
+        }, // Hacky fix to find the tfhe_bg.wasm
+        // alias: { 
+        //   'tfhe_bg.wasm$': path.resolve(__dirname, '/home/mlnd42/Documents/programming/front/ui-confidential-erc1155/node_modules/.pnpm/fhevmjs@0.4.0/node_modules/tfhe/tfhe_bg.wasm'),
+        // }, // Hacky fix to find the tfhe_bg.wasm when using pnpm
+    },
+    experiments: {
+      asyncWebAssembly: true,
     },
     // module:{
     //     /** "rules"
@@ -80,9 +97,18 @@ module.exports={
         rules: [
           {
             test: /\.(ts|tsx)$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/, /\.wasm$/],
             use: 'ts-loader',
           },
+          // {
+          //   test: /\.wasm$/,
+          //   type: 'javascript/auto',
+          //   use: 'file-loader',
+          // },
+          // {
+          //   test: /\.wasm$/,
+          //   type: 'webassembly/sync',
+          // },
         ]
       },
 }
