@@ -30,12 +30,23 @@ export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
     const encryptedData = instance?.encrypt32(clearData)
     const encryptedDataHex = toHexString(encryptedData ?? new Uint8Array())
     console.log(encryptedDataHex)
-    writeContract({
-      address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
-      abi,
-      functionName: 'mintWithConfidentialData',
-      args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
-    })
+    try {
+      writeContract({
+        address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+        abi,
+        functionName: 'mintWithConfidentialData',
+        args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
+      })
+    } catch (error) {
+      console.error(error);
+      // Handle the error in your application, e.g. by setting an error state
+    }
+    // writeContract({
+    //   address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+    //   abi,
+    //   functionName: 'mintWithConfidentialData',
+    //   args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
+    // })
   } 
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = 
