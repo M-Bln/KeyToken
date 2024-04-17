@@ -8,8 +8,8 @@ export function Account() {
     const { disconnect } = useDisconnect()
     const { data: ensName } = useEnsName({ address })
     const { data: ensAvatar } = ensName ? useEnsAvatar({ name: ensName }) : { data: undefined };
-    const signer = useEthersSigner()
-    const provider = useEthersProvider()
+    const signer = useEthersSigner({ chainId: 9000 })
+    const provider = useEthersProvider({ chainId: 9000})
   
     return (
     <div> 

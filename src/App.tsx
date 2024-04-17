@@ -4,6 +4,8 @@ import { WagmiProvider, useAccount } from 'wagmi'
 import { config } from './config'
 import { Account } from './account' 
 import { WalletOptions } from './wallet-options' 
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
 
 const queryClient = new QueryClient()
 

@@ -7,15 +7,17 @@ import {
     useReadContract 
   } from 'wagmi'
   import { abi } from './abi'
+import { ethers } from 'ethers';
 
 interface AccessConfidentialDataProps {
     instance: FhevmInstance;
     tokenId: string,
     publicKey: Uint8Array,
     signature: string,
+    signerAdress: string,
 }
 
-export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, tokenId, publicKey, signature} ) => {
+export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, tokenId, publicKey, signature, signerAdress} ) => {
     const { 
         data: reencryptedData,
         error,   
@@ -25,17 +27,19 @@ export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( 
         address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
         functionName: 'getConfidentialData',
         args: [BigInt(tokenId),
-                `0x${bytesToString(publicKey)}`, 
-                `0x${signature}`,]
+                bytesToString(publicKey), 
+                `0x${signature.substring(2)}`,],
+        account: `0x${signerAdress.substring(2)}`
       })
-      const clearData = reencryptedData ? 
-      instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string): ""
+      //const clearData = reencryptedData ? 
+      //instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string) as unknown as string: ""
 
 
       return (
         <div>
+        {reencryptedData as string && <div> Clear Data: {String(instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string))} </div>} 
         {isPending && <div>Loading...</div>}
-        {error && <div>Error: {(error as unknown as BaseError).shortMessage || error.message}</div>}
+        {error && <div>Error: {(error as unknown as BaseError).details || error.message}</div>}
         </div>
       )
 

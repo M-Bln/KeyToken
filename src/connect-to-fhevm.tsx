@@ -11,14 +11,39 @@ interface ConnectToFhevmProps {
 
 export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer }) => {
     const [instance, setInstance] = useState<FhevmInstance | null>(null);
+    const [token, setToken] = useState<{ publicKey: Uint8Array; signature: string } | null>(null);
 
     useEffect(() => {
+        console.log('provider or signer changed', provider, signer);
         const createInstance = async () => {
             const { createFhevmInstance } = await import('./create-fhevm-instance');
             const newInstance = await createFhevmInstance('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', signer, provider);
             setInstance(newInstance || null);
+            const generatedToken = newInstance.generatePublicKey({
+                verifyingContract: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+            });
+            console.log('token publick key: ',generatedToken.publicKey)
+            console.log('token eip712: ',generatedToken.eip712)
+            console.log('token message: ',generatedToken.eip712.message)
+            console.log('token type: ',  { Reencrypt: generatedToken.eip712.types.Reencrypt })
+            console.log('token domain: ', generatedToken.eip712.domain)
+            console.log('signer ', signer.getAddress())
+            const signature = await signer.signTypedData(
+                generatedToken.eip712.domain,
+                { Reencrypt: generatedToken.eip712.types.Reencrypt }, // Need to remove EIP712Domain from types
+                generatedToken.eip712.message,
+            );
+            console.log('signer ', signer)
+            console.log('signature: ', signature)
+            console.log('signer ', signer)
+            newInstance.setSignature('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', signature);
+            const newToken = newInstance.getPublicKey('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3');
+            console.log('newToken: ', newToken);
+            console.log('instance.getPublicKey: ', newInstance.getPublicKey('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3'));
+            console.log('newToken public key: ', newToken?.publicKey);
+            console.log('newToken signature: ', newToken?.signature);
+            setToken(newToken || null)
         };
-
         createInstance();
     }, [provider, signer]);
     // useEffect(() => {
@@ -27,9 +52,18 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
     //         setInstance(await newInstance);
     //     });
     // }, [provider, signer]);
+
+
+
+
+
+
     return (
         <div>
             {instance && <MintNFT instance={instance} />}
+            {instance && token && <AccessConfidentialData instance={instance} tokenId={"4"} 
+            publicKey={token.publicKey} signature={token.signature} signerAdress={`0xf0A5B532fc2A5D8E324Cc2D7c61DBFdC100D391e`}/>}   
+            {instance && !token && <div>Failed to get fhevm token</div>}
             {!instance && <div>Failed to initiate instance</div>}
         </div>
     );
