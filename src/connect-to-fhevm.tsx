@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { MintNFT } from './mint-nft';
+import { AccessConfidentialData } from './access-confidential-data';
 import { FhevmInstance } from 'fhevmjs';
 
 interface ConnectToFhevmProps {
@@ -26,15 +27,24 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
     //         setInstance(await newInstance);
     //     });
     // }, [provider, signer]);
-    if (instance) {
-        return (
-            <MintNFT instance={instance}/>
-        );
-    } else {
-        return(
-            <div>Failed to initiate instance</div>
-        )
-    }
+    return (
+        <div>
+            {instance && <MintNFT instance={instance} />}
+            {!instance && <div>Failed to initiate instance</div>}
+        </div>
+    );
+    //             {instance && <AccessConfidentialData instance={instance} />}
+    //             {instance && <AccessConfidentialData instance={instance} />}
+    // if (instance) {
+    //     return (
+    //         <MintNFT instance={instance}/>
+    //         <AccessConfidentialData instance={instance}/>
+    //     );
+    // } else {
+    //     return(
+    //         <div>Failed to initiate instance</div>
+    //     )
+    // }
     // if (instance) {
     //     return (
     //         <MintNFT instance={instance}/>

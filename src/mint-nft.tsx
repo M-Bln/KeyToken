@@ -8,11 +8,11 @@ import { abi } from './abi'
 import { FhevmInstance } from 'fhevmjs';
  
 interface MintNFTProps {
-  instance: FhevmInstance | null;
+  instance: FhevmInstance;
 }
 
 
-export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
+export const MintNFT: React.FC<MintNFTProps> =( {instance} ) => {
   const { 
     data: hash,
     error,   
@@ -24,7 +24,7 @@ export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
     e.preventDefault() 
     const formData = new FormData(e.target as HTMLFormElement) 
     const tokenId = formData.get('tokenId') as string
-    const address = formData.get('address') as string 
+    const address = formData.get('address') as `0x${string}` 
     const clearData = BigInt(formData.get('data') as string)
     console.log(clearData)
     const encryptedData = instance?.encrypt32(clearData)
@@ -76,6 +76,6 @@ export const MintNFT: React.FC<MintNFTProps> =({ instance }) => {
   )
 }
 
-function toHexString(byteArray: Uint8Array) {
-  return '0x' + Array.from(byteArray, byte => ('0' + (byte & 0xFF).toString(16)).slice(-2)).join('');
+function toHexString(byteArray: Uint8Array): `0x${string}` {
+  return  `0x${Array.from(byteArray, byte => ('0' + (byte & 0xFF).toString(16)).slice(-2)).join('')}`;
 }
