@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { MintNFT } from './mint-nft';
-import { AccessConfidentialData } from './access-confidential-data';
+import { AskConfidentialData } from './ask-confidential-data';
 import { FhevmInstance } from 'fhevmjs';
 
 interface ConnectToFhevmProps {
@@ -61,12 +61,13 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
     return (
         <div>
             {instance && <MintNFT instance={instance} />}
-            {instance && token && <AccessConfidentialData instance={instance} tokenId={"4"} 
-            publicKey={token.publicKey} signature={token.signature} signerAdress={`0xf0A5B532fc2A5D8E324Cc2D7c61DBFdC100D391e`}/>}   
+            {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />}
             {instance && !token && <div>Failed to get fhevm token</div>}
             {!instance && <div>Failed to initiate instance</div>}
         </div>
     );
+    //           {instance && token && <AccessConfidentialData instance={instance} tokenId={"5"} 
+    // publicKey={token.publicKey} signature={token.signature} signerAddress={`0xf0A5B532fc2A5D8E324Cc2D7c61DBFdC100D391e`}/>}   
     //             {instance && <AccessConfidentialData instance={instance} />}
     //             {instance && <AccessConfidentialData instance={instance} />}
     // if (instance) {

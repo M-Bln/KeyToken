@@ -14,10 +14,10 @@ interface AccessConfidentialDataProps {
     tokenId: string,
     publicKey: Uint8Array,
     signature: string,
-    signerAdress: string,
+    signerAddress: string,
 }
 
-export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, tokenId, publicKey, signature, signerAdress} ) => {
+export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, tokenId, publicKey, signature, signerAddress} ) => {
     const { 
         data: reencryptedData,
         error,   
@@ -29,7 +29,7 @@ export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( 
         args: [BigInt(tokenId),
                 bytesToString(publicKey), 
                 `0x${signature.substring(2)}`,],
-        account: `0x${signerAdress.substring(2)}`
+        account: `0x${signerAddress.substring(2)}`
       })
       //const clearData = reencryptedData ? 
       //instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string) as unknown as string: ""
