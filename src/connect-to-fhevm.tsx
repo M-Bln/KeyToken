@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { MintNFT } from './mint-nft';
 import { AskConfidentialData } from './ask-confidential-data';
+import { Web3Auth } from './web3-auth';
 import { FhevmInstance } from 'fhevmjs';
 
 interface ConnectToFhevmProps {
@@ -64,6 +65,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
             {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />}
             {instance && !token && <div>Failed to get fhevm token</div>}
             {!instance && <div>Failed to initiate instance</div>}
+            {<Web3Auth signer={signer} provider={provider}/>}
         </div>
     );
     //           {instance && token && <AccessConfidentialData instance={instance} tokenId={"5"} 
