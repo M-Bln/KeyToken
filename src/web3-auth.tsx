@@ -10,17 +10,18 @@ import { createRemotePinner } from '@helia/remote-pinning';
 interface Web3AuthProps {
     provider: ethers.Provider;
     signer: ethers.Signer;
+    setAuthHeader: (authHeader: string) => void;
 }
 
-export const Web3Auth : React.FC<Web3AuthProps> = ({provider, signer}) => {
-    const [authHeader, setAuthHeader] = useState<string | null>(null);
+export const Web3Auth : React.FC<Web3AuthProps> = ({provider, signer, setAuthHeader}) => {
+    //const [authHeader, setAuthHeader] = useState<string | null>(null);
     const [fileSelected, setFileSelected] = useState<boolean>(false);
     const [file, setFile] = useState<Uint8Array>(new Uint8Array(0));
 
     const signWeb3Auth = async () => {
         const address = await signer.getAddress();
         const signature = await signer.signMessage(address);
-        setAuthHeader(`eth-${address}:${signature}`);
+        setAuthHeader(Buffer.from(`eth-${address}:${signature}`).toString('base64'));
         // IPFS Web3 Authed Gateway address
         const ipfsGateway = 'https://crustipfs.xyz'
 
@@ -46,27 +47,11 @@ export const Web3Auth : React.FC<Web3AuthProps> = ({provider, signer}) => {
             console.error(error);
         }
     }
-    const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const fileToUpload = e.target.files?.[0];
-        
-        if (fileToUpload) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const arrayBuffer = reader.result as ArrayBuffer;
-                const fileAsUint8Array = new Uint8Array(arrayBuffer);
-                setFile(fileAsUint8Array);
-            };
-            reader.readAsArrayBuffer(fileToUpload);
-            setFileSelected(true);
-        }
-
-    }, [file])
 
     return(
         <div>
-            {!fileSelected && <input type="file" onChange={handleFile} required/>}
-            {fileSelected && !authHeader && <button onClick={signWeb3Auth}>sign Web3 Authentification</button>}
-            {authHeader && <div>Web3 Authentification header: {authHeader}</div>}
+            You can upload the encrypted file to crustipfs.xyz gateway. This requires to authentify by signing your own ethereum address.
+        <button onClick={signWeb3Auth}>sign Web3 Authentification</button>
         </div>
     )
 }
