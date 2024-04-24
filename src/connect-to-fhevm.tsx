@@ -5,6 +5,7 @@ import { AskConfidentialData } from './ask-confidential-data';
 import { Web3Auth } from './web3-auth';
 import { FhevmInstance } from 'fhevmjs';
 import { UploadConfidentialContent } from './upload-confidential-content';
+import { AccessConfidentialContent } from './access-confidential-content';
 
 interface ConnectToFhevmProps {
     provider: ethers.Provider;
@@ -63,6 +64,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
     return (
         <div>
             <UploadConfidentialContent signer={signer} provider={provider}/>
+            <AccessConfidentialContent signer={signer} />
             {instance && <MintNFT instance={instance} />}
             {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />}
             {instance && !token && <div>Waiting for fhevm instance, require to sign publick key with metamask</div>}
