@@ -39,7 +39,7 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
 
     const loadEncryptedFile = async() => {
         try {
-            const response = await fetch(`https://ipfs.io/ipfs/${cid}?format=raw`);
+            const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
             console.log('response: ', response);
             const data = await response.arrayBuffer();
             console.log('data: ', data);

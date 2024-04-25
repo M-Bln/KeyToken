@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import lighthouse, { uploadEncrypted } from '@lighthouse-web3/sdk'
+import { Buffer } from "buffer";
 
 interface UploadToLighthouseProps {
     encryptedFile: Uint8Array;
@@ -13,9 +14,17 @@ export const UploadToLighthouse : React.FC<UploadToLighthouseProps> = ({encrypte
 
         // const progressCallback = (progressData) => {
         //     let percentageDone =
-        //       100 - (progressData?.total / progressData?.uploaded)?.toFixed(2)
+        //       100 - (progressData.total / progressData.uploaded)?.toFixed(2)
         //     console.log(percentageDone)
         //   }
+        function createFileList(file: File) {
+          return {
+              length: 1,
+              item: (index : number) => file,
+              0: file,
+              // Add properties for all other files similarly
+          };
+      }
         
           const uploadEncryptedFile = async() =>{
             // Push file to lighthouse node
@@ -23,7 +32,14 @@ export const UploadToLighthouse : React.FC<UploadToLighthouseProps> = ({encrypte
             // Third parameter is for multiple files, if multiple files are to be uploaded at once make it true
             // Fourth parameter is the deal parameters, default null
             if (lighthouseApiKey) {
-                const output = await lighthouse.uploadBuffer(encryptedFile, lighthouseApiKey);
+                console.log('Uploading encrypted file to lighthouse');
+                console.log('Encrypted File:', encryptedFile);
+                const blob = new Blob([encryptedFile], { type: 'application/octet-stream' });
+                const file = new File([blob], 'encrypted-file.txt');
+                const fileList = createFileList(file);
+                const buffer = encryptedFile.buffer;
+                console.log('Encrypted File Buffer:', buffer);
+                const output = await lighthouse.upload(fileList, lighthouseApiKey, false, undefined);
                 console.log('File Status:', output);
                 console.log('Visit at https://gateway.lighthouse.storage/ipfs/' + output.data.Hash);
                 setFileCid(output.data.Hash);
