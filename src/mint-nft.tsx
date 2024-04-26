@@ -20,22 +20,40 @@ export const MintNFT: React.FC<MintNFTProps> =( {instance} ) => {
     writeContract 
   } = useWriteContract() 
 
+  function splitBigIntToUint64Array(bigInt: bigint): bigint[] {
+    const euint64Array = [];
+    for (let i = 0; i < 4; i++) {
+      euint64Array[i] = bigInt % BigInt('0x10000000000000000');
+      bigInt = bigInt / BigInt('0x10000000000000000');
+        // euint64Array[i] = bigInt & BigInt(0xFFFFFFFFFFFFFFFF);
+        // bigInt = bigInt >> BigInt(64);
+    }
+    return euint64Array;
+  }
+
+  
+
   async function submit(e: React.FormEvent<HTMLFormElement>) { 
     e.preventDefault() 
     const formData = new FormData(e.target as HTMLFormElement) 
     const tokenId = formData.get('tokenId') as string
     const address = formData.get('address') as `0x${string}` 
-    const clearData = BigInt(formData.get('data') as string)
-    console.log(clearData)
-    const encryptedData = instance?.encrypt32(clearData)
-    const encryptedDataHex = toHexString(encryptedData ?? new Uint8Array())
-    console.log(encryptedDataHex)
+    const clearData = BigInt('0x'+formData.get('data') as string)
+    console.log('clearData: ', clearData)
+    const splitedClearData = splitBigIntToUint64Array(clearData);
+    console.log('splited clearData', splitedClearData);
+    const encryptedData = splitedClearData.map(n => instance?.encrypt64(n)).map(toHexString);
+    console.log('encryptedData: ', encryptedData); 
+    // const encryptedData = splitBigIntToUint64Array(clearData).map(n => instance?.encrypt64(n)).map(toHexString);
+    //const encryptedData = instance?.encrypt32(clearData)
+    //const encryptedDataHex = toHexString(encryptedData ?? new Uint8Array())
+    console.log(encryptedData)
     try {
       writeContract({
         address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
         abi,
         functionName: 'mintWithConfidentialData',
-        args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
+        args: [address, BigInt(tokenId), BigInt(1), encryptedData, '0x'],
       })
     } catch (error) {
       console.error(error);
@@ -76,6 +94,7 @@ export const MintNFT: React.FC<MintNFTProps> =( {instance} ) => {
   )
 }
 
-function toHexString(byteArray: Uint8Array): `0x${string}` {
+function toHexString(byteArray: Uint8Array | null): `0x${string}` {
+  if (!byteArray) return '0x';
   return  `0x${Array.from(byteArray, byte => ('0' + (byte & 0xFF).toString(16)).slice(-2)).join('')}`;
 }

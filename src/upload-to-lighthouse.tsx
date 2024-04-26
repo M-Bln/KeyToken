@@ -37,6 +37,7 @@ export const UploadToLighthouse : React.FC<UploadToLighthouseProps> = ({encrypte
                 const blob = new Blob([encryptedFile], { type: 'application/octet-stream' });
                 const file = new File([blob], 'encrypted-file.txt');
                 const fileList = createFileList(file);
+                
                 const buffer = encryptedFile.buffer;
                 console.log('Encrypted File Buffer:', buffer);
                 const output = await lighthouse.upload(fileList, lighthouseApiKey, false, undefined);
