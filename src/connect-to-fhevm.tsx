@@ -63,7 +63,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
 
     return (
         <div>
-            <UploadConfidentialContent signer={signer} provider={provider}/>
+            <UploadConfidentialContent/>
             <AccessConfidentialContent signer={signer} />
             {instance && <MintNFT instance={instance} />}
             {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />}
