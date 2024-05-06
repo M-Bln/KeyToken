@@ -1,5 +1,5 @@
 import { FhevmInstance } from 'fhevmjs'
-import * as React from 'react'
+import React, {useEffect, useState} from 'react'
 import { 
     type BaseError, 
     useWaitForTransactionReceipt,
@@ -17,9 +17,10 @@ interface AccessConfidentialDataProps {
     // signature: string,
     signerAddress: string,
     token: { publicKey: Uint8Array; signature: string };
+    setEncryptionKey: (encryptionKey: string) => void;
 }
 
-export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, cid, signerAddress, token} ) => {
+export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, cid, signerAddress, token, setEncryptionKey} ) => {
     const { 
         data: reencryptedData,
         error,   
@@ -33,8 +34,20 @@ export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( 
                 `0x${token.signature.substring(2)}`,],
         account: `0x${signerAddress.substring(2)}`
       })
+
+      const [stringContentKey, setStringContentKey] = useState<string | null>(null);
+
       //const clearData = reencryptedData ? 
       //instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string) as unknown as string: ""
+    
+// Inside AccessConfidentialData component
+  useEffect(() => {
+    // Assume getEncryptionKey is a function that retrieves the encryption key
+    if (reencryptedData) {
+      const newStringContentKey = decryptAndCombineEuint64Array(reencryptedData as string[]);
+      setEncryptionKey(newStringContentKey.toString(16));
+    }
+  }, [reencryptedData]);
 
     function decryptAndCombineEuint64Array(encryptedData: string[]): bigint {
       return [...encryptedData].reverse().reduce((combined, data) => {
@@ -54,7 +67,7 @@ export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( 
 
       return (
         <div>
-        {reencryptedData as string && <div> Clear Data: {decryptAndCombineEuint64Array(reencryptedData as string[]).toString(16)} </div>} 
+        {reencryptedData as string && <div> Content key: {decryptAndCombineEuint64Array(reencryptedData as string[]).toString(16)} </div>} 
         {isPending && <div>Loading...</div>}
         {error && <div>Error: {(error as unknown as BaseError).details || error.message}</div>}
         </div>

@@ -33,7 +33,7 @@ export const AskConfidentialData: React.FC<AccessConfidentialDataProps> = ({ ins
         >
             Get confidential data
         </button>
-        {tokenId && signerAddress &&  <AccessConfidentialData key={submitCounter} instance={instance} cid={tokenId} token={token} signerAddress={signerAddress}/>}
+        {/* {tokenId && signerAddress &&  <AccessConfidentialData key={submitCounter} instance={instance} cid={tokenId} token={token} signerAddress={signerAddress}/>} */}
       </form>       
     )
 }

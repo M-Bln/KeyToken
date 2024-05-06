@@ -13,7 +13,7 @@ interface AccessConfidentialContentProps {
 }
 
 export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps> = ({instance, signerAddress, token}) => {
-    const [tokenId, setTokenId] = useState<string | null >(null)
+    //const [tokenId, setTokenId] = useState<string | null >(null)
     const [cid, setCid] = useState<string | null >(null)
     const [encryptedFile, setEncryptedFile] = useState<Uint8Array | null>(null);
     const [clearFile, setClearFile] = useState<Uint8Array>(new Uint8Array(0));
@@ -43,7 +43,8 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
 
     const loadEncryptedFile = async() => {
         try {
-            const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
+            const response = await fetch(`https://cloudflare-ipfs.com/ipfs/${cid}`);
+            //const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
             console.log('response: ', response);
             const data = await response.arrayBuffer();
             console.log('data: ', data);
@@ -103,7 +104,7 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
     return (
         <div>
             <h1>Access Confidential Content</h1>
-            <label htmlFor="tokenId">token ID:</label>
+            {/* <label htmlFor="tokenId">token ID:</label>
         <input 
             type="text" 
             id="tokenId"  
@@ -114,7 +115,7 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
             type="text" 
             id="encryptionKey"  
             onChange={e => setEncryptionKey(e.target.value)} 
-        />
+        /> */}
         <label htmlFor="tokenId">Confidential content CID:</label>
         <input 
             type="text" 
@@ -124,9 +125,9 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
         {cid && <button onClick={loadEncryptedFile}>
                     Load encrypted file
                 </button>}
-        {cid && encryptedFile && <AccessConfidentialData instance={instance} cid = {cid} token = {token} signerAddress={signerAddress} />}
-        {/* {cid && <button onClick={getContentKey}> getContentKey </button>}
-        {encryptedFile && encryptionKey !== "" && <button onClick={decryptFile}> Decrypt content  </button>} */}
+        {cid && encryptedFile && <AccessConfidentialData instance={instance} cid = {cid} token = {token} signerAddress={signerAddress} setEncryptionKey={setEncryptionKey} />}
+        {/* {cid && <button onClick={getContentKey}> getContentKey </button>} */}
+        {encryptedFile && encryptionKey !== "" && <button onClick={decryptFile}> Decrypt content  </button>}
         </div>
     )
 }

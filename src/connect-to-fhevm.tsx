@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { MintNFT } from './mint-nft';
-import { AskConfidentialData } from './ask-confidential-data';
+//import { AskConfidentialData } from './ask-confidential-data';
 import { Web3Auth } from './web3-auth';
 import { FhevmInstance } from 'fhevmjs';
 import { UploadConfidentialContent } from './upload-confidential-content';
