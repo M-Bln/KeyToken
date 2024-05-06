@@ -5,12 +5,13 @@ import { AccessConfidentialData } from './access-confidential-data';
 
 interface AccessConfidentialDataProps {
     instance: FhevmInstance;
-    publicKey: Uint8Array,
-    signature: string,
+    token: { publicKey: Uint8Array; signature: string };
+    // publicKey: Uint8Array,
+    // signature: string,
     signer: Signer,
 }
 
-export const AskConfidentialData: React.FC<AccessConfidentialDataProps> = ({ instance, publicKey, signature, signer }) => {
+export const AskConfidentialData: React.FC<AccessConfidentialDataProps> = ({ instance, token, signer }) => {
     const [tokenId, setTokenId] = useState<string | null>(null);
     const [signerAddress, setSignerAddress] = useState<`0x${string}` | null>(null);
     const [submitCounter, setSubmitCounter] = useState<number>(0);
@@ -32,7 +33,7 @@ export const AskConfidentialData: React.FC<AccessConfidentialDataProps> = ({ ins
         >
             Get confidential data
         </button>
-        {tokenId && signerAddress &&  <AccessConfidentialData key={submitCounter} instance={instance} tokenId={tokenId} publicKey={publicKey} signature={signature} signerAddress={signerAddress}/>}
+        {tokenId && signerAddress &&  <AccessConfidentialData key={submitCounter} instance={instance} cid={tokenId} token={token} signerAddress={signerAddress}/>}
       </form>       
     )
 }

@@ -3,12 +3,16 @@ import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { decryptFile } from "@lighthouse-web3/sdk";
 import DownloadLink from "react-download-link";
+import { AccessConfidentialData } from "./access-confidential-data";
+import { FhevmInstance } from "fhevmjs";
 
 interface AccessConfidentialContentProps {
-    signer: ethers.Signer;
+    instance: FhevmInstance;
+    signerAddress: string;
+    token: { publicKey: Uint8Array; signature: string } ;
 }
 
-export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps> = ({signer}) => {
+export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps> = ({instance, signerAddress, token}) => {
     const [tokenId, setTokenId] = useState<string | null >(null)
     const [cid, setCid] = useState<string | null >(null)
     const [encryptedFile, setEncryptedFile] = useState<Uint8Array | null>(null);
@@ -120,7 +124,9 @@ export const AccessConfidentialContent : React.FC<AccessConfidentialContentProps
         {cid && <button onClick={loadEncryptedFile}>
                     Load encrypted file
                 </button>}
-        {encryptedFile && encryptionKey !== "" && <button onClick={decryptFile}> Decrypt content  </button>}
+        {cid && encryptedFile && <AccessConfidentialData instance={instance} cid = {cid} token = {token} signerAddress={signerAddress} />}
+        {/* {cid && <button onClick={getContentKey}> getContentKey </button>}
+        {encryptedFile && encryptionKey !== "" && <button onClick={decryptFile}> Decrypt content  </button>} */}
         </div>
     )
 }

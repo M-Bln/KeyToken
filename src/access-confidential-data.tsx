@@ -8,16 +8,18 @@ import {
   } from 'wagmi'
   import { abi } from './abi'
 import { ethers } from 'ethers';
+import { decodeBase58 } from 'ethers';
 
 interface AccessConfidentialDataProps {
     instance: FhevmInstance;
-    tokenId: string,
-    publicKey: Uint8Array,
-    signature: string,
+    cid: string,
+    // publicKey: Uint8Array,
+    // signature: string,
     signerAddress: string,
+    token: { publicKey: Uint8Array; signature: string };
 }
 
-export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, tokenId, publicKey, signature, signerAddress} ) => {
+export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( {instance, cid, signerAddress, token} ) => {
     const { 
         data: reencryptedData,
         error,   
@@ -26,9 +28,9 @@ export const AccessConfidentialData : React.FC<AccessConfidentialDataProps> = ( 
         abi,
         address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
         functionName: 'getConfidentialData',
-        args: [BigInt(tokenId),
-                bytesToString(publicKey), 
-                `0x${signature.substring(2)}`,],
+        args: [decodeBase58(cid.slice(4)),
+                bytesToString(token.publicKey), 
+                `0x${token.signature.substring(2)}`,],
         account: `0x${signerAddress.substring(2)}`
       })
       //const clearData = reencryptedData ? 

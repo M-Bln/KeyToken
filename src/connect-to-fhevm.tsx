@@ -15,11 +15,12 @@ interface ConnectToFhevmProps {
 export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer }) => {
     const [instance, setInstance] = useState<FhevmInstance | null>(null);
     const [token, setToken] = useState<{ publicKey: Uint8Array; signature: string } | null>(null);
+    const [signerAddress, setSignerAddress] = useState<string | null>(null);
 
-    useEffect(() => {
-        console.log('provider or signer changed', provider, signer);
         const createInstance = async () => {
             const { createFhevmInstance } = await import('./create-fhevm-instance');
+            const newSignerAddress = await signer.getAddress();
+            setSignerAddress(newSignerAddress);
             const newInstance = await createFhevmInstance('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', signer, provider);
             setInstance(newInstance || null);
             const generatedToken = newInstance.generatePublicKey({
@@ -31,6 +32,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
             console.log('token type: ',  { Reencrypt: generatedToken.eip712.types.Reencrypt })
             console.log('token domain: ', generatedToken.eip712.domain)
             console.log('signer ', signer.getAddress())
+            try {
             const signature = await signer.signTypedData(
                 generatedToken.eip712.domain,
                 { Reencrypt: generatedToken.eip712.types.Reencrypt }, // Need to remove EIP712Domain from types
@@ -46,9 +48,11 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
             console.log('newToken public key: ', newToken?.publicKey);
             console.log('newToken signature: ', newToken?.signature);
             setToken(newToken || null)
+            } catch {
+                setInstance(null);
+            }
         };
-        createInstance();
-    }, [provider, signer]);
+
     // useEffect(() => {
     //     import('./create-fhevm-instance').then(async ({ createFhevmInstance }) => {
     //         const newInstance = createFhevmInstance('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', signer, provider);
@@ -63,12 +67,12 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({ provider, signer
 
     return (
         <div>
-            <UploadConfidentialContent/>
-            <AccessConfidentialContent signer={signer} />
-            {instance && <MintNFT instance={instance} />}
-            {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />}
+            {!instance && <button onClick={createInstance} disabled={instance !== null && token === null}>Create Fhevm Instance</button>}
             {instance && !token && <div>Waiting for fhevm instance, require to sign publick key with metamask</div>}
-            {!instance && <div>Failed to initiate instance</div>}
+            {instance && token && <UploadConfidentialContent instance={instance}/>}
+            {instance && signerAddress && token && <AccessConfidentialContent instance={instance} signerAddress={signerAddress} token={token} />}
+            {/* {instance && token && <MintNFT instance={instance} />}
+            {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />} */}
         </div>
     );
     //           {instance && token && <AccessConfidentialData instance={instance} tokenId={"5"} 
