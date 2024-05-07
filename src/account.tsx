@@ -1,9 +1,12 @@
-import { useEthersProvider, useEthersSigner } from './ethers_adapters';
+import {
+  useEthersProvider,
+  useEthersSigner,
+} from './connect-to-network/ethers_adapters';
 import * as React from 'react';
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
 import { ConnectToFhevm } from './connect-to-network/connect-to-fhevm';
 
-export function MainPage() {
+export function Account() {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
