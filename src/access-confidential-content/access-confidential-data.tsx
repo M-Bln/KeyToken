@@ -6,7 +6,7 @@ import {
   type UseReadContractReturnType,
   useReadContract,
 } from 'wagmi';
-import { abi } from './abi';
+import { abi } from '../connect-to-network/abi';
 import { ethers } from 'ethers';
 import { decodeBase58 } from 'ethers';
 

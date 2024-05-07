@@ -4,7 +4,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
-import { abi } from './abi';
+import { abi } from '../connect-to-network/abi';
 import { FhevmInstance } from 'fhevmjs';
 
 interface MintNFTProps {

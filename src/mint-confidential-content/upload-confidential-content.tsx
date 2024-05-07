@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { ethers } from 'ethers';
-import { Web3Auth } from './web3-auth';
+import { Web3Auth } from '../web3-auth';
 import { EncryptFile } from './encrypt-file';
-import { UploadToCrustIpfs } from './upload-to-crust-ipfs';
-import { UploadToLighthouse } from './upload-to-lighthouse';
+import { UploadToCrustIpfs } from '../upload-to-crust-ipfs';
+import { UploadToLighthouse } from '../upload-to-lighthouse';
 import { DelegatedUpload } from './delegated-upload';
-import { ContractInteractions } from './contract-interactions';
+import { ContractInteractions } from '../contract-interactions';
 import { MintConfidentialToken } from './mint-confidential-token';
 import { FhevmInstance } from 'fhevmjs';
 

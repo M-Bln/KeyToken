@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-import { MintNFT } from './mint-nft';
+import { MintNFT } from '../mint-confidential-content/mint-nft';
 //import { AskConfidentialData } from './ask-confidential-data';
-import { Web3Auth } from './web3-auth';
+import { Web3Auth } from '../web3-auth';
 import { FhevmInstance } from 'fhevmjs';
-import { UploadConfidentialContent } from './upload-confidential-content';
-import { AccessConfidentialContent } from './access-confidential-content';
+import { UploadConfidentialContent } from '../mint-confidential-content/upload-confidential-content';
+import { AccessConfidentialContent } from '../access-confidential-content/access-confidential-content';
 
 interface ConnectToFhevmProps {
   provider: ethers.Provider;

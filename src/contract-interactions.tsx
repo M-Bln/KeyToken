@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, useAccount } from 'wagmi';
-import { config } from './config';
-import { Account } from './account';
-import { WalletOptions } from './wallet-options';
+import { config } from './connect-to-network/config';
+import { Account } from './main-page';
+import { WalletOptions } from './connect-to-network/wallet-options';
 import { Buffer } from 'buffer';
 window.Buffer = Buffer;
 
