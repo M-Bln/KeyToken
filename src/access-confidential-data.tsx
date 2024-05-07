@@ -80,7 +80,15 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
 
   return (
     <div>
-      {/* {(reencryptedData as string[]).length > 0 && <div> Content key: {decryptAndCombineEuint64Array(reencryptedData as string[]).toString(16)} </div>}  */}
+      {(reencryptedData as string) && (
+        <div>
+          {' '}
+          Content key:{' '}
+          {decryptAndCombineEuint64Array(reencryptedData as string[]).toString(
+            16,
+          )}{' '}
+        </div>
+      )}
       {isPending && <div>Loading...</div>}
       {error && (
         <div>
