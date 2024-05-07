@@ -14,6 +14,7 @@ export const UploadConfidentialContent: React.FC<
 > = ({ instance }) => {
   const [fileSelected, setFileSelected] = useState<boolean>(false);
   const [file, setFile] = useState<Uint8Array>(new Uint8Array(0));
+  const [fileName, setFileName] = useState('');
   const [fileCid, setFileCid] = useState<string | null>(null);
   const [encryptedFile, setEncryptedFile] = useState<Uint8Array>(
     new Uint8Array(0),
@@ -22,7 +23,8 @@ export const UploadConfidentialContent: React.FC<
   const handleFile = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const fileToUpload = e.target.files?.[0];
-
+      setFileName(fileToUpload?.name ?? '');
+      setEncryptionKey(null);
       if (fileToUpload) {
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -53,10 +55,11 @@ export const UploadConfidentialContent: React.FC<
       )}
       {encryptionKey !== null && (
         <div>
-          The file was encrypted with this private key:{' '}
+          The file {fileName} was encrypted with this private key:{' '}
           {encryptionKey.toString(16)}
         </div>
       )}
+      <h2>Upload confidential content options</h2>
       <DelegatedUpload encryptedFile={encryptedFile} setFileCid={setFileCid} />
       <UploadToLighthouse
         encryptedFile={encryptedFile}

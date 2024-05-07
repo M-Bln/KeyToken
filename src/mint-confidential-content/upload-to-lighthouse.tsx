@@ -84,11 +84,18 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
 
   return (
     <div>
-      <h2>Upload to lighthouse IPFS node</h2>
-      You can upload the encrypted file with lighthouse. You then rely on a
-      third party rather than having to run your own IPFS node. First you need
-      to optain a Lighthouse API key ...., it only require to identify with
-      metamask wallet.
+      <h3>Second option: upload to Lighthouse IPFS node</h3>
+      Then you rely on a third party for storing and availability of content.
+      Lightouse offers free limited storage. It requires only a crypto wallet to
+      login and to obtain an API key at{' '}
+      <a
+        href="https://www.lighthouse.storage/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Lighthouse Storage
+      </a>
+      <br />
       <label htmlFor="lighthouseApiKey">Lighthouse API Key:</label>
       <input
         type="text"
@@ -100,6 +107,8 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
           <button onClick={uploadEncryptedFile}>upload to lighthouse</button>
         </div>
       )}
+      You can then later buy storage on the FileCoin network for a decentralized
+      approach.
     </div>
   );
   //          {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}  {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}  {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}

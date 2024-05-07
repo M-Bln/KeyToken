@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Signer } from 'ethers';
 import { FhevmInstance } from 'fhevmjs';
-import { AccessConfidentialData } from './access-confidential-content/access-confidential-data';
 
 interface AccessConfidentialDataProps {
   instance: FhevmInstance;
