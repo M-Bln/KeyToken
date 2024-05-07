@@ -21,10 +21,23 @@ const fheLocalhost: Chain = {
   },
 };
 
+const zama: Chain = {
+  id: 8_009,
+  name: 'Zama Network',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'ZAMA',
+    symbol: 'ZAMA',
+  },
+  rpcUrls: {
+    default: { http: ['https://devnet.zama.ai'] },
+  },
+};
+
 export const config = createConfig({
-  chains: [fheLocalhost],
+  chains: [zama],
   connectors: [injected(), safe()],
   transports: {
-    [fheLocalhost.id]: http(),
+    [zama.id]: http(),
   },
 });
