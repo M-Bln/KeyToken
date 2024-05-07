@@ -1,31 +1,31 @@
-import * as React from 'react'
-import { Connector, useConnect } from 'wagmi'
+import * as React from 'react';
+import { Connector, useConnect } from 'wagmi';
 
 function WalletOption({
   connector,
   onClick,
 }: {
-  connector: Connector
-  onClick: () => void
+  connector: Connector;
+  onClick: () => void;
 }) {
-  const [ready, setReady] = React.useState(false)
+  const [ready, setReady] = React.useState(false);
 
   React.useEffect(() => {
-    ;(async () => {
-      const provider = await connector.getProvider()
-      setReady(!!provider)
-    })()
-  }, [connector])
+    (async () => {
+      const provider = await connector.getProvider();
+      setReady(!!provider);
+    })();
+  }, [connector]);
 
   return (
     <button disabled={!ready} onClick={onClick}>
       {connector.name}
     </button>
-  )
+  );
 }
 
 export function WalletOptions() {
-  const { connectors, connect } = useConnect()
+  const { connectors, connect } = useConnect();
 
   return connectors.map((connector) => (
     <WalletOption
@@ -33,5 +33,5 @@ export function WalletOptions() {
       connector={connector}
       onClick={() => connect({ connector })}
     />
-  ))
+  ));
 }

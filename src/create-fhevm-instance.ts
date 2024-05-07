@@ -1,31 +1,33 @@
-import { ethers, Provider, Signer } from "ethers";
+import { Provider, Signer, ethers } from 'ethers';
 //import type { ethers } from "ethers";
-import { FhevmInstance, createInstance, initFhevm} from "fhevmjs/web";
-// import { ethers as hethers } from "hardhat";
-export const FHE_LIB_ADDRESS = "0x000000000000000000000000000000000000005d";
+import { FhevmInstance, createInstance, initFhevm } from 'fhevmjs/web';
 
+// import { ethers as hethers } from "hardhat";
+export const FHE_LIB_ADDRESS = '0x000000000000000000000000000000000000005d';
 
 // const HARDHAT_NETWORK = process.env.HARDHAT_NETWORK;
 
 //let publicKey: string | undefined;
 //let chainId: number;
 
-
-
-export const createFhevmInstance = async (contractAddress: string, account: Signer, provider: Provider) => {
-  const network = await provider.getNetwork()
-  const chainId = +network.chainId.toString()
+export const createFhevmInstance = async (
+  contractAddress: string,
+  account: Signer,
+  provider: Provider,
+) => {
+  const network = await provider.getNetwork();
+  const chainId = +network.chainId.toString();
   const ret = await provider.call({
     // fhe lib address, may need to be changed depending on network
     to: '0x000000000000000000000000000000000000005d',
     // first four bytes of keccak256('fhePubKey(bytes1)') + 1 byte for library
     data: '0xd9d47bb001',
-  })
-  const decoded = ethers.AbiCoder.defaultAbiCoder().decode(['bytes'], ret)
-  const publicKey = decoded[0]
-  await initFhevm() // Load TFHE
-  return createInstance({ chainId: chainId, publicKey })
-}
+  });
+  const decoded = ethers.AbiCoder.defaultAbiCoder().decode(['bytes'], ret);
+  const publicKey = decoded[0];
+  await initFhevm(); // Load TFHE
+  return createInstance({ chainId: chainId, publicKey });
+};
 
 // export const initFHE = async (contractAddress: string, account: Signer, provider: Provider) => {
 //   // provider = new providers.Web3Provider(metamaskProvider as any)
@@ -33,7 +35,6 @@ export const createFhevmInstance = async (contractAddress: string, account: Sign
 //   await initFhevm() // Load TFHE
 //   return await createFhevmInstance(contractAddress, account, provider)
 // }
-
 
 // export const createFhevmInstance = async (contractAddress: string, account: Signer, provider: Provider) => {
 //   try {
@@ -74,7 +75,7 @@ export const createFhevmInstance = async (contractAddress: string, account: Sign
 //           }
 //         }, 2000);
 //       });
-//     } else {  
+//     } else {
 //       console.error("Public key is undefined");
 //       throw new Error("Public key is undefined");
 //     }
@@ -87,7 +88,7 @@ export const createFhevmInstance = async (contractAddress: string, account: Sign
 //     //     console.error("Error generating public key:", e);
 //     //   }
 //     //   return instance;
-//     // } else {  
+//     // } else {
 //     //   console.error("Public key is undefined");
 //     //   throw new Error("Public key is undefined");
 //     // }
@@ -129,14 +130,14 @@ export const createFhevmInstance = async (contractAddress: string, account: Sign
 //     } catch (e) {
 //       publicKey = undefined;
 //     }
-  
+
 //     const instance = await createInstance({ chainId, publicKey });
-  
+
 //     await generatePublicKey(contractAddress, account, instance);
-  
+
 //     return instance;
 //   };
-  
+
 //   const generatePublicKey = async (contractAddress: string, signer: Signer, instance: FhevmInstance) => {
 //     // Generate token to decrypt
 //     const generatedToken = instance.generatePublicKey({
