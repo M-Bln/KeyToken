@@ -56,6 +56,8 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
         reencryptedData as string[],
       );
       setEncryptionKey(newStringContentKey.toString(16));
+    } else {
+      setEncryptionKey('');
     }
   }, [reencryptedData]);
 
@@ -92,7 +94,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
       {isPending && <div>Loading...</div>}
       {error && (
         <div>
-          Error: {(error as unknown as BaseError).details || error.message}
+          Error: {(error as unknown as BaseError).shortMessage || error.message}
         </div>
       )}
     </div>

@@ -13,9 +13,11 @@ export const AccessConfidentialContent: React.FC<
 > = ({ instance, signerAddress, token }) => {
   //const [tokenId, setTokenId] = useState<string | null >(null)
   const [cid, setCid] = useState<string | null>(null);
+  const [cidInputField, setCidInputField] = useState<string>('');
   const [encryptedFile, setEncryptedFile] = useState<Uint8Array | null>(null);
   const [clearFile, setClearFile] = useState<Uint8Array>(new Uint8Array(0));
   const [encryptionKey, setEncryptionKey] = useState<string>('');
+  const [loadingError, setLoadingError] = useState<string | null>(null);
 
   // const loadEncryptedFile = async() => {
   //     if (cid) {
@@ -41,7 +43,10 @@ export const AccessConfidentialContent: React.FC<
 
   const loadEncryptedFile = async () => {
     try {
-      const response = await fetch(`https://cloudflare-ipfs.com/ipfs/${cid}`);
+      setCid(cidInputField);
+      const response = await fetch(
+        `https://cloudflare-ipfs.com/ipfs/${cidInputField}`,
+      );
       //const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
       console.log('response: ', response);
       const data = await response.arrayBuffer();
@@ -49,8 +54,10 @@ export const AccessConfidentialContent: React.FC<
       const fileAsUint8Array = new Uint8Array(data);
       console.log('file as Uint8Array: ', fileAsUint8Array);
       setEncryptedFile(fileAsUint8Array);
+      setLoadingError(null);
     } catch (error) {
-      console.error('Error fetching encrypted file', error);
+      setLoadingError('Error fetching encrypted file' + (error as string));
+      //console.error('Error fetching encrypted file', error);
     }
   };
 
@@ -129,8 +136,16 @@ export const AccessConfidentialContent: React.FC<
             onChange={e => setEncryptionKey(e.target.value)} 
         /> */}
       <label htmlFor="tokenId">Confidential content CID:</label>
-      <input type="text" id="CID" onChange={(e) => setCid(e.target.value)} />
-      {cid && <button onClick={loadEncryptedFile}>Load encrypted file</button>}
+      <input
+        type="text"
+        id="CID"
+        onChange={(e) => setCidInputField(e.target.value)}
+      />
+      {/* <button onClick={() => setCid(cidInputField)}>Set CID</button> */}
+      {cidInputField !== '' && (
+        <button onClick={loadEncryptedFile}>Load encrypted file</button>
+      )}
+      {loadingError && <div>{loadingError}</div>}
       {cid && encryptedFile && (
         <AccessConfidentialData
           instance={instance}
