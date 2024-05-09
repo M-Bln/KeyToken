@@ -1,10 +1,12 @@
+import * as React from 'react';
+import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
+
+import { ConnectToFhevm } from './connect-to-network/connect-to-fhevm';
 import {
   useEthersProvider,
   useEthersSigner,
 } from './connect-to-network/ethers_adapters';
-import * as React from 'react';
-import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
-import { ConnectToFhevm } from './connect-to-network/connect-to-fhevm';
+import { chainId } from './network-config';
 
 export function Account() {
   const { address } = useAccount();
@@ -13,8 +15,8 @@ export function Account() {
   const { data: ensAvatar } = ensName
     ? useEnsAvatar({ name: ensName })
     : { data: undefined };
-  const signer = useEthersSigner({ chainId: 9000 });
-  const provider = useEthersProvider({ chainId: 9000 });
+  const signer = useEthersSigner({ chainId: chainId });
+  const provider = useEthersProvider({ chainId: chainId });
 
   return (
     <div>

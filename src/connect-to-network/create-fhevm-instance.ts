@@ -1,6 +1,6 @@
-import { Provider, Signer, ethers } from 'ethers';
+import { ethers, Provider, Signer } from 'ethers';
 //import type { ethers } from "ethers";
-import { FhevmInstance, createInstance, initFhevm } from 'fhevmjs/web';
+import { createInstance, initFhevm } from 'fhevmjs/web';
 
 // import { ethers as hethers } from "hardhat";
 export const FHE_LIB_ADDRESS = '0x000000000000000000000000000000000000005d';

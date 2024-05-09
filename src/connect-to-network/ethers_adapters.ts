@@ -9,6 +9,7 @@ import type { Account, Chain, Client, Transport } from 'viem';
 import { type Config, useClient, useConnectorClient } from 'wagmi';
 
 export function clientToProvider(client: Client<Transport, Chain>) {
+  console.log('clientToProvider client: ', client);
   const { chain, transport } = client;
   const network = {
     chainId: chain.id,
@@ -27,7 +28,9 @@ export function clientToProvider(client: Client<Transport, Chain>) {
 
 /** Action to convert a viem Client to an ethers.js Provider. */
 export function useEthersProvider({ chainId }: { chainId?: number } = {}) {
+  console.log('useEthersProvider chain id: ', chainId);
   const client = useClient<Config>({ chainId });
+  console.log('useEthersProvider client: ', client);
   return useMemo(
     () => (client ? clientToProvider(client) : undefined),
     [client],
@@ -35,6 +38,7 @@ export function useEthersProvider({ chainId }: { chainId?: number } = {}) {
 }
 
 export function clientToSigner(client: Client<Transport, Chain, Account>) {
+  console.log('clientToSigner client: ', client);
   const { account, chain, transport } = client;
   const network = {
     chainId: chain.id,

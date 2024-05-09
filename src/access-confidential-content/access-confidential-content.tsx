@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { AccessConfidentialData } from './access-confidential-data';
 import { FhevmInstance } from 'fhevmjs';
+import React, { useState } from 'react';
+
+import { AccessConfidentialData } from './access-confidential-data';
 
 interface AccessConfidentialContentProps {
   instance: FhevmInstance;
@@ -15,7 +16,7 @@ export const AccessConfidentialContent: React.FC<
   const [cid, setCid] = useState<string | null>(null);
   const [cidInputField, setCidInputField] = useState<string>('');
   const [encryptedFile, setEncryptedFile] = useState<Uint8Array | null>(null);
-  const [clearFile, setClearFile] = useState<Uint8Array>(new Uint8Array(0));
+  // const [clearFile, setClearFile] = useState<Uint8Array>(new Uint8Array(0));
   const [encryptionKey, setEncryptionKey] = useState<string>('');
   const [loadingError, setLoadingError] = useState<string | null>(null);
 
@@ -92,7 +93,7 @@ export const AccessConfidentialContent: React.FC<
       const decryptedFileAsUint8Array = new Uint8Array(decryptedFile);
       console.log('decrypted file: ', decryptedFileAsUint8Array);
       // Convert the decrypted file to a Uint8Array and set the clearFile state
-      setClearFile(decryptedFileAsUint8Array);
+      // setClearFile(decryptedFileAsUint8Array);
 
       // Create a Blob from the decrypted file
       const blob = new Blob([decryptedFileAsUint8Array]);

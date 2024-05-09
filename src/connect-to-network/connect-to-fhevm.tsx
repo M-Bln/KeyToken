@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { FhevmInstance } from 'fhevmjs';
-import { UploadConfidentialContent } from '../mint-confidential-content/upload-confidential-content';
+import React, { useState } from 'react';
+
 import { AccessConfidentialContent } from '../access-confidential-content/access-confidential-content';
+import { UploadConfidentialContent } from '../mint-confidential-content/upload-confidential-content';
+import { contractAddress } from '../network-config';
 
 interface ConnectToFhevmProps {
   provider: ethers.Provider;
@@ -25,13 +27,13 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
     const newSignerAddress = await signer.getAddress();
     setSignerAddress(newSignerAddress);
     const newInstance = await createFhevmInstance(
-      '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+      contractAddress,
       signer,
       provider,
     );
     setInstance(newInstance || null);
     const generatedToken = newInstance.generatePublicKey({
-      verifyingContract: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+      verifyingContract: contractAddress,
     });
     console.log('token publick key: ', generatedToken.publicKey);
     console.log('token eip712: ', generatedToken.eip712);
@@ -50,17 +52,12 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
       console.log('signer ', signer);
       console.log('signature: ', signature);
       console.log('signer ', signer);
-      newInstance.setSignature(
-        '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
-        signature,
-      );
-      const newToken = newInstance.getPublicKey(
-        '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
-      );
+      newInstance.setSignature(contractAddress, signature);
+      const newToken = newInstance.getPublicKey(contractAddress);
       console.log('newToken: ', newToken);
       console.log(
         'instance.getPublicKey: ',
-        newInstance.getPublicKey('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3'),
+        newInstance.getPublicKey(contractAddress),
       );
       console.log('newToken public key: ', newToken?.publicKey);
       console.log('newToken signature: ', newToken?.signature);
@@ -72,7 +69,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
 
   // useEffect(() => {
   //     import('./create-fhevm-instance').then(async ({ createFhevmInstance }) => {
-  //         const newInstance = createFhevmInstance('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', signer, provider);
+  //         const newInstance = createFhevmInstance(contractAddress, signer, provider);
   //         setInstance(await newInstance);
   //     });
   // }, [provider, signer]);

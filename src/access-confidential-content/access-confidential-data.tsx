@@ -1,14 +1,14 @@
+import { decodeBase58 } from 'ethers';
 import { FhevmInstance } from 'fhevmjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   type BaseError,
-  useWaitForTransactionReceipt,
-  type UseReadContractReturnType,
   useReadContract,
+  type UseReadContractReturnType,
 } from 'wagmi';
+
 import { abi } from '../connect-to-network/abi';
-import { ethers } from 'ethers';
-import { decodeBase58 } from 'ethers';
+import { contractAddress } from '../network-config';
 
 interface AccessConfidentialDataProps {
   instance: FhevmInstance;
@@ -33,7 +33,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
     isPending,
   }: UseReadContractReturnType = useReadContract({
     abi,
-    address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+    address: contractAddress,
     functionName: 'getConfidentialData',
     args: [
       decodeBase58(cid.slice(4)),
@@ -43,10 +43,10 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
     account: `0x${signerAddress.substring(2)}`,
   });
 
-  const [stringContentKey, setStringContentKey] = useState<string | null>(null);
+  //const [stringContentKey, setStringContentKey] = useState<string | null>(null);
 
   //const clearData = reencryptedData ?
-  //instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',reencryptedData as string) as unknown as string: ""
+  //instance.decrypt(contractAddress,reencryptedData as string) as unknown as string: ""
 
   // Inside AccessConfidentialData component
   useEffect(() => {
@@ -63,10 +63,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
 
   function decryptAndCombineEuint64Array(encryptedData: string[]): bigint {
     return [...encryptedData].reverse().reduce((combined, data) => {
-      const decrypted = instance.decrypt(
-        '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
-        data,
-      );
+      const decrypted = instance.decrypt(contractAddress, data);
       return (combined << BigInt(64)) + decrypted;
     }, BigInt(0));
   }
@@ -74,7 +71,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
   // function decryptAndCombineEuint64Array(encryptedData: string[]): bigint {
   //   let combined = BigInt(0);
   //   for (let i = encryptedData.length -1 ; i >= 0 ; i--) {
-  //       const decrypted = instance.decrypt('0xF161F15261233Db423ba1D12eDcc086fa37AF4f3', encryptedData[i]);
+  //       const decrypted = instance.decrypt(contractAddress, encryptedData[i]);
   //       combined = (combined << BigInt(64)) + BigInt(decrypted);
   //   }
   //   return combined;
@@ -94,7 +91,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
       {isPending && <div>Loading...</div>}
       {error && (
         <div>
-          Error: {(error as unknown as BaseError).shortMessage || error.message}
+          Error: {(error as unknown as BaseError).details || error.message}
         </div>
       )}
     </div>

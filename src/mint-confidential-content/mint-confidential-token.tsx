@@ -1,12 +1,15 @@
+import { decodeBase58 } from 'ethers';
+import { FhevmInstance } from 'fhevmjs';
 import * as React from 'react';
 import {
   type BaseError,
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
+
 import { abi } from '../connect-to-network/abi';
-import { FhevmInstance } from 'fhevmjs';
-import { decodeBase58 } from 'ethers';
+import { config } from '../connect-to-network/config';
+import { contractAddress } from '../network-config';
 
 interface MintConfidentialTokenProps {
   instance: FhevmInstance;
@@ -19,9 +22,14 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
   fileCid,
   contentEncryptionKey,
 }) => {
-  const { data: hash, error, isPending, writeContract } = useWriteContract();
-  const [missingCidOrKeyError, setMissingCidOrKeyError] =
-    React.useState<boolean>(false);
+  const {
+    data: hash,
+    error,
+    isPending,
+    writeContract,
+  } = useWriteContract({ config });
+  // const [missingCidOrKeyError, setMissingCidOrKeyError] =
+  //   React.useState<boolean>(false);
 
   function splitBigIntToUint64Array(bigInt: bigint): bigint[] {
     const euint64Array = [];
@@ -37,10 +45,10 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (contentEncryptionKey === null || fileCid === null) {
-      setMissingCidOrKeyError(true);
+      // setMissingCidOrKeyError(true);
       return;
     } else {
-      setMissingCidOrKeyError(false);
+      // setMissingCidOrKeyError(false);
       const formData = new FormData(e.target as HTMLFormElement);
       //const tokenId = formData.get('tokenId') as string
       const address = formData.get('address') as `0x${string}`;
@@ -59,7 +67,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       console.log(encryptedData);
       try {
         writeContract({
-          address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+          address: contractAddress,
           abi,
           functionName: 'mintWithConfidentialData',
           args: [
@@ -71,12 +79,12 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
           ],
         });
       } catch (error) {
+        console.log('error minting token: ', error);
         console.error(error);
-        // Handle the error in your application, e.g. by setting an error state
       }
     }
     // writeContract({
-    //   address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+    //   address: contractAddress,
     //   abi,
     //   functionName: 'mintWithConfidentialData',
     //   args: [address, BigInt(tokenId), BigInt(1), encryptedDataHex, '0x'],
@@ -90,7 +98,9 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
 
   return (
     <form onSubmit={submit}>
+      <label>Mint to: </label>
       <input name="address" placeholder="0xA0Cf…251e" required />
+      <label>Ammount to Mint</label>
       <input name="value" placeholder="1000" required />
       <button
         disabled={isPending || !fileCid || !contentEncryptionKey}
@@ -102,7 +112,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       {isConfirming && <div>Waiting for confirmation...</div>}
       {isConfirmed && <div>Transaction confirmed.</div>}
       {error && (
-        <div>Error: {(error as BaseError).shortMessage || error.message}</div>
+        <div>Error: {(error as BaseError).details || error.message}</div>
       )}
     </form>
   );

@@ -1,11 +1,13 @@
+import { FhevmInstance } from 'fhevmjs';
 import * as React from 'react';
 import {
   type BaseError,
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
+
 import { abi } from '../connect-to-network/abi';
-import { FhevmInstance } from 'fhevmjs';
+import { contractAddress } from '../network-config';
 
 interface MintNFTProps {
   instance: FhevmInstance;
@@ -44,7 +46,7 @@ export const MintNFT: React.FC<MintNFTProps> = ({ instance }) => {
     console.log(encryptedData);
     try {
       writeContract({
-        address: '0xF161F15261233Db423ba1D12eDcc086fa37AF4f3',
+        address: contractAddress,
         abi,
         functionName: 'mintWithConfidentialData',
         args: [address, BigInt(tokenId), BigInt(1), encryptedData, '0x'],
