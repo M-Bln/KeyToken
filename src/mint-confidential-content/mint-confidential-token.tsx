@@ -77,6 +77,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
             encryptedData,
             '0x',
           ],
+          gas: BigInt(10_000_000),
         });
       } catch (error) {
         console.log('error minting token: ', error);
