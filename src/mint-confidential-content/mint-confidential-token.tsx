@@ -52,6 +52,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       const formData = new FormData(e.target as HTMLFormElement);
       //const tokenId = formData.get('tokenId') as string
       const address = formData.get('address') as `0x${string}`;
+      const amount = BigInt(formData.get('amount') as string);
       // const clearData = BigInt('0x'+formData.get('data') as string)
       // console.log('clearData: ', clearData)
       const splitedEncryptionKey =
@@ -73,11 +74,11 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
           args: [
             address,
             decodeBase58(fileCid.slice(4)),
-            BigInt(1),
+            amount,
             encryptedData,
             '0x',
           ],
-          gas: BigInt(10_000_000),
+          //gas: BigInt(10_000_000),
         });
       } catch (error) {
         console.log('error minting token: ', error);
@@ -102,7 +103,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       <label>Mint to: </label>
       <input name="address" placeholder="0xA0Cf…251e" required />
       <label>Ammount to Mint</label>
-      <input name="value" placeholder="1000" required />
+      <input name="amount" placeholder="1000" required />
       <button
         disabled={isPending || !fileCid || !contentEncryptionKey}
         type="submit"
