@@ -52,7 +52,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
   useEffect(() => {
     // Assume getEncryptionKey is a function that retrieves the encryption key
     if (reencryptedData) {
-      const newStringContentKey = decryptAndCombineEuint64Array(
+      const newStringContentKey = decryptAndCombineEuint32Array(
         reencryptedData as string[],
       );
       setEncryptionKey(newStringContentKey.toString(16));
@@ -61,10 +61,17 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
     }
   }, [reencryptedData]);
 
-  function decryptAndCombineEuint64Array(encryptedData: string[]): bigint {
+  // function decryptAndCombineEuint64Array(encryptedData: string[]): bigint {
+  //   return [...encryptedData].reverse().reduce((combined, data) => {
+  //     const decrypted = instance.decrypt(contractAddress, data);
+  //     return (combined << BigInt(64)) + decrypted;
+  //   }, BigInt(0));
+  // }
+
+  function decryptAndCombineEuint32Array(encryptedData: string[]): bigint {
     return [...encryptedData].reverse().reduce((combined, data) => {
       const decrypted = instance.decrypt(contractAddress, data);
-      return (combined << BigInt(64)) + decrypted;
+      return (combined << BigInt(32)) + decrypted;
     }, BigInt(0));
   }
 
@@ -83,7 +90,7 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
         <div>
           {' '}
           Content key:{' '}
-          {decryptAndCombineEuint64Array(reencryptedData as string[]).toString(
+          {decryptAndCombineEuint32Array(reencryptedData as string[]).toString(
             16,
           )}{' '}
         </div>
