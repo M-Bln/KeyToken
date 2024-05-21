@@ -31,15 +31,15 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
   // const [missingCidOrKeyError, setMissingCidOrKeyError] =
   //   React.useState<boolean>(false);
 
-  function splitBigIntToUint64Array(bigInt: bigint): bigint[] {
-    const euint64Array = [];
-    for (let i = 0; i < 4; i++) {
-      euint64Array[i] = bigInt % BigInt('0x10000000000000000');
-      bigInt = bigInt / BigInt('0x10000000000000000');
+  function splitBigIntToUint32Array(bigInt: bigint): bigint[] {
+    const euint32Array = [];
+    for (let i = 0; i < 8; i++) {
+      euint32Array[i] = bigInt % BigInt('0x100000000');
+      bigInt = bigInt / BigInt('0x100000000');
       // euint64Array[i] = bigInt & BigInt(0xFFFFFFFFFFFFFFFF);
       // bigInt = bigInt >> BigInt(64);
     }
-    return euint64Array;
+    return euint32Array;
   }
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -55,10 +55,10 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       // const clearData = BigInt('0x'+formData.get('data') as string)
       // console.log('clearData: ', clearData)
       const splitedEncryptionKey =
-        splitBigIntToUint64Array(contentEncryptionKey);
+        splitBigIntToUint32Array(contentEncryptionKey);
       // console.log('splited clearData', splitedClearData);
       const encryptedData = splitedEncryptionKey
-        .map((n) => instance?.encrypt64(n))
+        .map((n) => instance?.encrypt32(n))
         .map(toHexString);
       console.log('encryptedData: ', encryptedData);
       // const encryptedData = splitBigIntToUint64Array(clearData).map(n => instance?.encrypt64(n)).map(toHexString);
@@ -77,7 +77,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
             encryptedData,
             '0x',
           ],
-          gas: BigInt(10_000_000),
+          //  gas: BigInt(10_000_000),
         });
       } catch (error) {
         console.log('error minting token: ', error);

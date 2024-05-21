@@ -9,24 +9,51 @@ declare module 'wagmi' {
   }
 }
 
-const fheLocalhost: Chain = {
-  id: 9_000,
-  name: 'fheLocalhost',
+// const fheLocalhost: Chain = {
+//   id: 9_000,
+//   name: 'fheLocalhost',
+//   nativeCurrency: {
+//     decimals: 18,
+//     name: 'tEVMOS',
+//     symbol: 'TEVMOS',
+//   },
+//   rpcUrls: {
+//     default: { http: ['http://127.0.0.1:8545'] },
+//   },
+// };
+
+// export const config = createConfig({
+//   chains: [fheLocalhost],
+//   connectors: [injected(), safe()],
+//   transports: {
+//     [fheLocalhost.id]: http(),
+//   },
+// });
+
+const inco: Chain = {
+  id: 9_090,
+  name: 'Inco Gentry Testnet',
   nativeCurrency: {
+    name: 'INCO',
+    symbol: 'INCO',
     decimals: 18,
-    name: 'tEVMOS',
-    symbol: 'TEVMOS',
+  },
+  blockExplorers: {
+    default: {
+      name: 'block explorer',
+      url: 'https://explorer.testnet.inco.org',
+    },
   },
   rpcUrls: {
-    default: { http: ['http://127.0.0.1:8545'] },
+    default: { http: ['https://testnet.inco.org/'] },
   },
 };
 
 export const config = createConfig({
-  chains: [fheLocalhost],
+  chains: [inco],
   connectors: [injected(), safe()],
   transports: {
-    [fheLocalhost.id]: http(),
+    [inco.id]: http(),
   },
 });
 
