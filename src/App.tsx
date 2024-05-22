@@ -20,7 +20,14 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectWallet />
+        <div>
+          <h1>Welcome to Key Token</h1>
+          <p>
+            Your NFTs, now with real value. Access exclusive content securely
+            and privately.
+          </p>
+          <ConnectWallet />
+        </div>
       </QueryClientProvider>
     </WagmiProvider>
   );

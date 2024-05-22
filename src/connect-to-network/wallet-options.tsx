@@ -18,7 +18,7 @@ function WalletOption({
   }, [connector]);
 
   return (
-    <button disabled={!ready} onClick={onClick}>
+    <button disabled={!ready} onClick={onClick} className="btn">
       {connector.name}
     </button>
   );
