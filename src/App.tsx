@@ -21,7 +21,7 @@ function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <div>
-          <h1>Welcome to Key Token</h1>
+          <h1>Key Token</h1>
           <p>
             Your NFTs, now with real value. Access exclusive content securely
             and privately.

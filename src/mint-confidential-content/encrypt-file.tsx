@@ -47,5 +47,9 @@ export const EncryptFile: React.FC<FileProps> = ({
     setEncryptedFile(new Uint8Array(encryptedFile));
   }, [file, setEncryptedFile, setEncryptionKey]);
 
-  return <button onClick={encryptFile}>Encrypt file</button>;
+  return (
+    <button onClick={encryptFile} className="button">
+      Encrypt file
+    </button>
+  );
 };

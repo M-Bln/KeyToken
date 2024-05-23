@@ -107,6 +107,7 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       <button
         disabled={isPending || !fileCid || !contentEncryptionKey}
         type="submit"
+        className="button"
       >
         {isPending ? 'Confirming...' : 'Mint'}
       </button>

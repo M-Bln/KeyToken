@@ -18,7 +18,12 @@ function WalletOption({
   }, [connector]);
 
   return (
-    <button disabled={!ready} onClick={onClick} className="btn">
+    <button
+      disabled={!ready}
+      onClick={onClick}
+      className="button"
+      // className={`button ${!ready ? 'opacity-50 cursor-not-allowed' : ''}`}
+    >
       {connector.name}
     </button>
   );

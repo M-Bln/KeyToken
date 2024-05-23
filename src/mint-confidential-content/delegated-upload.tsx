@@ -49,7 +49,7 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
         https://docs.ipfs.io/how-to/command-line-quick-start/
       </a>
       <br />
-      <button onClick={downloadEncryptedFile}>
+      <button onClick={downloadEncryptedFile} className="button">
         {' '}
         Download encrypted file
       </button>{' '}

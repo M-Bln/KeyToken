@@ -80,6 +80,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
         <button
           onClick={createInstance}
           disabled={instance !== null && token === null}
+          className="button"
         >
           Create Fhevm Instance
         </button>

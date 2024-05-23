@@ -1,6 +1,5 @@
+import lighthouse from '@lighthouse-web3/sdk';
 import React, { useState } from 'react';
-import lighthouse, { uploadEncrypted } from '@lighthouse-web3/sdk';
-import { Buffer } from 'buffer';
 
 interface UploadToLighthouseProps {
   encryptedFile: Uint8Array;
@@ -15,7 +14,7 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
 }) => {
   //const [fileCid, setFileCid] = useState<string | null>(null);
   const [lighthouseApiKey, setLighthouseApiKey] = useState<string | null>(null);
-  //const [authHeader, setAuthHeader] = useState<string | null>(null);
+  //const [authHeader, setAuthHeader] = useState<string |null>(null);
 
   // const progressCallback = (progressData) => {
   //     let percentageDone =

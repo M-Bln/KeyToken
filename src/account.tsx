@@ -19,13 +19,15 @@ export function Account() {
   const provider = useEthersProvider({ chainId: chainId });
 
   return (
-    <div className="flex">
+    <div className="flex flex-col">
       {ensAvatar && <img alt="ENS Avatar" src={ensAvatar} />}
       {provider && signer && (
         <ConnectToFhevm provider={provider} signer={signer} />
       )}
       {address && <div>{ensName ? `${ensName} (${address})` : address}</div>}
-      <button onClick={() => disconnect()}>Disconnect</button>
+      <button className="button self-start" onClick={() => disconnect()}>
+        Disconnect
+      </button>
     </div>
   );
 }
