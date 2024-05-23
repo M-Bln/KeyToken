@@ -122,8 +122,8 @@ export const AccessConfidentialContent: React.FC<
   };
 
   return (
-    <div>
-      <h1>Access Confidential Content</h1>
+    <div className="white-rounded">
+      <h1 className="h1">Access Confidential Content</h1>
       {/* <label htmlFor="tokenId">token ID:</label>
         <input 
             type="text" 

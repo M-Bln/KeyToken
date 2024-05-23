@@ -77,16 +77,18 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
   return (
     <div>
       {!instance && (
-        <button
-          onClick={createInstance}
-          disabled={instance !== null && token === null}
-          className="button"
-        >
-          Create Fhevm Instance
-        </button>
+        <div className="white-rounded">
+          <button
+            onClick={createInstance}
+            disabled={instance !== null && token === null}
+            className="button"
+          >
+            Create Fhevm Instance
+          </button>
+        </div>
       )}
       {instance && !token && (
-        <div>
+        <div className="white-rounded">
           Waiting for fhevm instance, require to sign publick key with metamask
         </div>
       )}

@@ -134,9 +134,9 @@ export const UploadConfidentialContent: React.FC<
     [file],
   );
   return (
-    <div>
-      <h1>Mint Confidential Content</h1>
-      <h2>Encrypt content</h2>
+    <div className="white-rounded">
+      <h1 className="h1">Mint Confidential Content</h1>
+      <h2 className="h2">Encrypt content</h2>
       <div>
         Choose a file to encrypt and upload{' '}
         <input type="file" onChange={handleFile} />
@@ -154,7 +154,7 @@ export const UploadConfidentialContent: React.FC<
           {encryptionKey.toString(16)}
         </div>
       )}
-      <h2>Upload confidential content options</h2>
+      <h2 className="h2">Upload confidential content options</h2>
       <DelegatedUpload encryptedFile={encryptedFile} setFileCid={setFileCid} />
       <UploadToLighthouse
         encryptedFile={encryptedFile}
@@ -163,7 +163,7 @@ export const UploadConfidentialContent: React.FC<
       />
       {fileCid && <div>Encrypted content CID: {fileCid}</div>}
       <div>
-        <h2>Mint Confidential Token</h2>
+        <h2 className="h2">Mint Confidential Token</h2>
         {fileCid === null &&
           encryptionKey === null &&
           'First encrypt the content and provide the CID'}
