@@ -26,7 +26,8 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="bg-gray-100 min-h-screen p-6">
+        {/* <div className="bg-gray-100 min-h-screen p-6"> */}
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
           <div className="white-rounded">
             <h1 className="h1">Key Token</h1>
             <p>

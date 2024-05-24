@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import { DelegatedUpload } from './delegated-upload';
 import { EncryptFile } from './encrypt-file';
 import { MintConfidentialToken } from './mint-confidential-token';
+import Option from './option';
 import Step from './step';
 import { UploadToLighthouse } from './upload-to-lighthouse';
 
@@ -66,19 +67,23 @@ export const UploadConfidentialContent: React.FC<
       </Step>
 
       <Step title="2nd step, Upload confidential content options">
-        <DelegatedUpload
-          encryptedFile={encryptedFile}
-          setFileCid={setFileCid}
-        />
-        <UploadToLighthouse
-          encryptedFile={encryptedFile}
-          setFileCid={setFileCid}
-          fileCid={fileCid}
-        />
-        {fileCid && <div>Encrypted content CID: {fileCid}</div>}
+        <Option title="1st option, Upload to your own IPFS node">
+          <DelegatedUpload
+            encryptedFile={encryptedFile}
+            setFileCid={setFileCid}
+          />
+        </Option>
+        <Option title="2nd option, Upload to Lighthouse IPFS node">
+          <UploadToLighthouse
+            encryptedFile={encryptedFile}
+            setFileCid={setFileCid}
+            fileCid={fileCid}
+          />
+          {fileCid && <div>Encrypted content CID: {fileCid}</div>}
+        </Option>
       </Step>
 
-      <Step title="3nd step, Mint Key Token">
+      <Step title="3rd step, Mint Key Token">
         {fileCid === null &&
           encryptionKey === null &&
           'First encrypt the content and provide the CID'}

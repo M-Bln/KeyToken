@@ -83,7 +83,7 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
 
   return (
     <div>
-      <h3>Second option: upload to Lighthouse IPFS node</h3>
+      {/* <h3>Second option: upload to Lighthouse IPFS node</h3> */}
       Then you rely on a third party for storing and availability of content.
       Lightouse offers free limited storage. It requires only a crypto wallet to
       login and to obtain an API key at{' '}

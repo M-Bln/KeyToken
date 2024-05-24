@@ -36,7 +36,7 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
 
   return (
     <div>
-      <h3>First option: upload to your own IPFS node</h3>
+      {/* <h3>First option: upload to your own IPFS node</h3> */}
       Manage yourself the storing of the content with IPFS. You are then
       responsible to make content available to users. <br />
       Download the encrypted file and upload it to your own IPFS node with
@@ -50,9 +50,8 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
       </a>
       <br />
       <button onClick={downloadEncryptedFile} className="button">
-        {' '}
         Download encrypted file
-      </button>{' '}
+      </button>
       <br />
       Put it on your own IPFS node and fill in the CID, it should start with Qm.
       <br />
