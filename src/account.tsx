@@ -19,7 +19,7 @@ export function Account() {
   const provider = useEthersProvider({ chainId: chainId });
 
   return (
-    <div>
+    <div className="pb-20">
       {ensAvatar && <img alt="ENS Avatar" src={ensAvatar} />}
       {provider && signer && (
         <ConnectToFhevm provider={provider} signer={signer} />

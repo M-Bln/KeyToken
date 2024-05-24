@@ -98,6 +98,7 @@ import React, { useCallback, useState } from 'react';
 import { DelegatedUpload } from './delegated-upload';
 import { EncryptFile } from './encrypt-file';
 import { MintConfidentialToken } from './mint-confidential-token';
+import Step from './step';
 import { UploadToLighthouse } from './upload-to-lighthouse';
 
 interface UploadConfidentialContentProps {
@@ -107,6 +108,8 @@ interface UploadConfidentialContentProps {
 export const UploadConfidentialContent: React.FC<
   UploadConfidentialContentProps
 > = ({ instance }) => {
+  //const [isOpen, setIsOpen] = useState(false);
+
   const [fileSelected, setFileSelected] = useState<boolean>(false);
   const [file, setFile] = useState<Uint8Array>(new Uint8Array(0));
   const [fileName, setFileName] = useState('');
@@ -136,34 +139,97 @@ export const UploadConfidentialContent: React.FC<
   return (
     <div className="white-rounded">
       <h1 className="h1">Mint Confidential Content</h1>
-      <h2 className="h2">Encrypt content</h2>
-      <div>
-        Choose a file to encrypt and upload{' '}
-        <input type="file" onChange={handleFile} />
-      </div>
-      {fileSelected && !encryptionKey && (
-        <EncryptFile
-          file={file}
-          setEncryptedFile={setEncryptedFile}
-          setEncryptionKey={setEncryptionKey}
-        />
-      )}
-      {encryptionKey !== null && (
+      <Step title="1st step, Encrypt content">
         <div>
-          The file {fileName} was encrypted with this private key:{' '}
-          {encryptionKey.toString(16)}
+          Choose a file to encrypt and upload{' '}
+          <input type="file" onChange={handleFile} />
         </div>
-      )}
-      <h2 className="h2">Upload confidential content options</h2>
-      <DelegatedUpload encryptedFile={encryptedFile} setFileCid={setFileCid} />
-      <UploadToLighthouse
-        encryptedFile={encryptedFile}
-        setFileCid={setFileCid}
-        fileCid={fileCid}
-      />
-      {fileCid && <div>Encrypted content CID: {fileCid}</div>}
-      <div>
-        <h2 className="h2">Mint Confidential Token</h2>
+        {fileSelected && !encryptionKey && (
+          <EncryptFile
+            file={file}
+            setEncryptedFile={setEncryptedFile}
+            setEncryptionKey={setEncryptionKey}
+          />
+        )}
+        {encryptionKey !== null && (
+          <div>
+            The file {fileName} was encrypted with this private key:{' '}
+            {encryptionKey.toString(16)}
+          </div>
+        )}
+      </Step>
+      {/* <div className="inner-div">
+        <h2 className="h2 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+          1st step, Encrypt content {isOpen ? '^' : 'v'}
+        </h2>
+        {isOpen && (
+          <div className="transition-all duration-500 ease-in-out">
+            <div>
+              Choose a file to encrypt and upload{' '}
+              <input type="file" onChange={handleFile} />
+            </div>
+            {fileSelected && !encryptionKey && (
+              <EncryptFile
+                file={file}
+                setEncryptedFile={setEncryptedFile}
+                setEncryptionKey={setEncryptionKey}
+              />
+            )}
+            {encryptionKey !== null && (
+              <div>
+                The file {fileName} was encrypted with this private key:{' '}
+                {encryptionKey.toString(16)}
+              </div>
+            )}
+          </div>
+        )}
+      </div> */}
+      {/* <div className="inner-div">
+        <h2 className="h2">1st step, Encrypt content</h2>
+        <div>
+          Choose a file to encrypt and upload{' '}
+          <input type="file" onChange={handleFile} />
+        </div>
+        {fileSelected && !encryptionKey && (
+          <EncryptFile
+            file={file}
+            setEncryptedFile={setEncryptedFile}
+            setEncryptionKey={setEncryptionKey}
+          />
+        )}
+        {encryptionKey !== null && (
+          <div>
+            The file {fileName} was encrypted with this private key:{' '}
+            {encryptionKey.toString(16)}
+          </div>
+        )}
+      </div> */}
+      <Step title="2nd step, Upload confidential content options">
+        <DelegatedUpload
+          encryptedFile={encryptedFile}
+          setFileCid={setFileCid}
+        />
+        <UploadToLighthouse
+          encryptedFile={encryptedFile}
+          setFileCid={setFileCid}
+          fileCid={fileCid}
+        />
+        {fileCid && <div>Encrypted content CID: {fileCid}</div>}
+      </Step>
+      {/* <div className="inner-div">
+        <h2 className="h2">2nd step, Upload confidential content options</h2>
+        <DelegatedUpload
+          encryptedFile={encryptedFile}
+          setFileCid={setFileCid}
+        />
+        <UploadToLighthouse
+          encryptedFile={encryptedFile}
+          setFileCid={setFileCid}
+          fileCid={fileCid}
+        />
+        {fileCid && <div>Encrypted content CID: {fileCid}</div>}
+      </div> */}
+      <Step title="3nd step, Mint Key Token">
         {fileCid === null &&
           encryptionKey === null &&
           'First encrypt the content and provide the CID'}
@@ -174,7 +240,20 @@ export const UploadConfidentialContent: React.FC<
             contentEncryptionKey={encryptionKey}
           />
         )}
-      </div>
+      </Step>
+      {/* <div className="inner-div">
+        <h2 className="h2">3nd step, Mint Key Token</h2>
+        {fileCid === null &&
+          encryptionKey === null &&
+          'First encrypt the content and provide the CID'}
+        {fileCid && encryptionKey !== null && (
+          <MintConfidentialToken
+            instance={instance}
+            fileCid={fileCid}
+            contentEncryptionKey={encryptionKey}
+          />
+        )}
+      </div> */}
     </div>
   );
   //            {!authHeader && <Web3Auth provider={provider} signer={signer} setAuthHeader={setAuthHeader}/>}
