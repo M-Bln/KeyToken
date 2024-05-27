@@ -82,33 +82,71 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
   };
 
   return (
-    <div>
-      {/* <h3>Second option: upload to Lighthouse IPFS node</h3> */}
-      Then you rely on a third party for storing and availability of content.
-      Lightouse offers free limited storage. It requires only a crypto wallet to
-      login and to obtain an API key at{' '}
-      <a
-        href="https://www.lighthouse.storage/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Lighthouse Storage
-      </a>
-      <br />
-      <label htmlFor="lighthouseApiKey">Lighthouse API Key:</label>
-      <input
-        type="text"
-        id="lighthouseApiKey"
-        onChange={(e) => setLighthouseApiKey(e.target.value)}
-      />
+    <div className="p-4 bg-white rounded-md shadow-sm">
+      <p className="text-gray-600 mb-4">
+        Then you rely on a third party for storing and availability of content.
+        Lighthouse offers free limited storage. It requires only a crypto wallet
+        to login and to obtain an API key at{' '}
+        <a
+          href="https://www.lighthouse.storage/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-indigo-500 underline hover:text-indigo-700"
+        >
+          Lighthouse Storage
+        </a>
+        .
+      </p>
+      <p className="text-gray-600 mb-4">
+        You can then later buy storage on the FileCoin network for a
+        decentralized approach.
+      </p>
+      <div className="mb-4">
+        <label htmlFor="lighthouseApiKey" className="block text-gray-700 mb-2">
+          Lighthouse API Key:
+        </label>
+        <input
+          type="text"
+          id="lighthouseApiKey"
+          onChange={(e) => setLighthouseApiKey(e.target.value)}
+          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
       {lighthouseApiKey && !fileCid && (
-        <div>
-          <button onClick={uploadEncryptedFile}>upload to lighthouse</button>
+        <div className="mt-4">
+          <button onClick={uploadEncryptedFile} className="button">
+            Upload to Lighthouse
+          </button>
         </div>
       )}
-      You can then later buy storage on the FileCoin network for a decentralized
-      approach.
     </div>
+    // <div>
+    //   {/* <h3>Second option: upload to Lighthouse IPFS node</h3> */}
+    //   Then you rely on a third party for storing and availability of content.
+    //   Lightouse offers free limited storage. It requires only a crypto wallet to
+    //   login and to obtain an API key at{' '}
+    //   <a
+    //     href="https://www.lighthouse.storage/"
+    //     target="_blank"
+    //     rel="noopener noreferrer"
+    //   >
+    //     Lighthouse Storage
+    //   </a>
+    //   <br />
+    //   <label htmlFor="lighthouseApiKey">Lighthouse API Key:</label>
+    //   <input
+    //     type="text"
+    //     id="lighthouseApiKey"
+    //     onChange={(e) => setLighthouseApiKey(e.target.value)}
+    //   />
+    //   {lighthouseApiKey && !fileCid && (
+    //     <div>
+    //       <button onClick={uploadEncryptedFile}>upload to lighthouse</button>
+    //     </div>
+    //   )}
+    //   You can then later buy storage on the FileCoin network for a decentralized
+    //   approach.
+    // </div>
   );
   //          {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}  {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}  {//fileCid && <div>File uploaded to lighthouse, visit at https://gateway.lighthouse.storage/ipfs/{fileCid}</div>}
 };

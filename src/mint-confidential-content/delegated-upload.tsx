@@ -35,32 +35,72 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
   };
 
   return (
-    <div>
-      {/* <h3>First option: upload to your own IPFS node</h3> */}
-      Manage yourself the storing of the content with IPFS. You are then
-      responsible to make content available to users. <br />
-      Download the encrypted file and upload it to your own IPFS node with
-      version 0. See how to run an IPFS node at{' '}
-      <a
-        href="https://docs.ipfs.io/how-to/command-line-quick-start/"
-        target="_blank"
-        rel="noopener noreferrer"
+    <div className="p-4 bg-white rounded-md shadow-sm">
+      <p className="text-gray-600 mb-4">
+        Manage yourself the storing of the content with IPFS. You are then
+        responsible to make content available to users.
+      </p>
+      <p className="text-gray-600 mb-4">
+        Download the encrypted file and upload it to your own IPFS node with
+        version 0. See how to run an IPFS node at{' '}
+        <a
+          href="https://docs.ipfs.io/how-to/command-line-quick-start/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-indigo-500 underline hover:text-indigo-700"
+        >
+          this guide
+        </a>
+        .
+      </p>
+      <button
+        onClick={downloadEncryptedFile}
+        className="bg-indigo-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-4"
       >
-        https://docs.ipfs.io/how-to/command-line-quick-start/
-      </a>
-      <br />
-      <button onClick={downloadEncryptedFile} className="button">
         Download encrypted file
       </button>
-      <br />
-      Put it on your own IPFS node and fill in the CID, it should start with Qm.
-      <br />
-      <label htmlFor="CID">CID: </label>
-      <input
-        type="text"
-        id="CID"
-        onChange={(e) => setFileCid(e.target.value)}
-      />
+      <p className="text-gray-600 mb-4">
+        Put it on your own IPFS node and fill in the CID, it should start with
+        Qm.
+      </p>
+      <div className="mb-4">
+        <label htmlFor="CID" className="block text-gray-700 mb-2">
+          CID:
+        </label>
+        <input
+          type="text"
+          id="CID"
+          onChange={(e) => setFileCid(e.target.value)}
+          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
     </div>
+    // <div>
+    //   {/* <h3>First option: upload to your own IPFS node</h3> */}
+    //   Manage yourself the storing of the content with IPFS. You are then
+    //   responsible to make content available to users. <br />
+    //   Download the encrypted file and upload it to your own IPFS node with
+    //   version 0. See how to run an IPFS node at{' '}
+    //   <a
+    //     href="https://docs.ipfs.io/how-to/command-line-quick-start/"
+    //     target="_blank"
+    //     rel="noopener noreferrer"
+    //   >
+    //     https://docs.ipfs.io/how-to/command-line-quick-start/
+    //   </a>
+    //   <br />
+    //   <button onClick={downloadEncryptedFile} className="button">
+    //     Download encrypted file
+    //   </button>
+    //   <br />
+    //   Put it on your own IPFS node and fill in the CID, it should start with Qm.
+    //   <br />
+    //   <label htmlFor="CID">CID: </label>
+    //   <input
+    //     type="text"
+    //     id="CID"
+    //     onChange={(e) => setFileCid(e.target.value)}
+    //   />
+    // </div>
   );
 };

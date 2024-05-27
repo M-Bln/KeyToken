@@ -122,31 +122,30 @@ export const AccessConfidentialContent: React.FC<
   };
 
   return (
+    // <//"p-6 bg-white rounded-md shadow-sm"div className= "white-rounded">
     <div className="white-rounded">
+      {/* <h1 className="text-2xl font-bold text-gray-800 mb-4"> */}
       <h1 className="h1">Access Confidential Content</h1>
-      {/* <label htmlFor="tokenId">token ID:</label>
-        <input 
-            type="text" 
-            id="tokenId"  
-            onChange={e => setTokenId(e.target.value)} 
+      <div className="mb-4">
+        <label htmlFor="CID" className="block text-gray-700 mb-2">
+          Confidential content CID:
+        </label>
+        <input
+          type="text"
+          id="CID"
+          onChange={(e) => setCidInputField(e.target.value)}
+          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         />
-        <label htmlFor="encryptionKey">Encryption key:</label>
-        <input 
-            type="text" 
-            id="encryptionKey"  
-            onChange={e => setEncryptionKey(e.target.value)} 
-        /> */}
-      <label htmlFor="tokenId">Confidential content CID:</label>
-      <input
-        type="text"
-        id="CID"
-        onChange={(e) => setCidInputField(e.target.value)}
-      />
-      {/* <button onClick={() => setCid(cidInputField)}>Set CID</button> */}
+      </div>
       {cidInputField !== '' && (
-        <button onClick={loadEncryptedFile}>Load encrypted file</button>
+        <button
+          onClick={loadEncryptedFile}
+          className="bg-indigo-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-4"
+        >
+          Load encrypted file
+        </button>
       )}
-      {loadingError && <div>{loadingError}</div>}
+      {loadingError && <div className="text-red-500 mb-4">{loadingError}</div>}
       {cid && encryptedFile && (
         <AccessConfidentialData
           instance={instance}
@@ -156,10 +155,53 @@ export const AccessConfidentialContent: React.FC<
           setEncryptionKey={setEncryptionKey}
         />
       )}
-      {/* {cid && <button onClick={getContentKey}> getContentKey </button>} */}
       {encryptedFile && encryptionKey !== '' && (
-        <button onClick={decryptFile}> Decrypt content </button>
+        <button
+          onClick={decryptFile}
+          className="bg-green-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        >
+          Decrypt content
+        </button>
       )}
     </div>
+    // <div className="white-rounded">
+    //   <h1 className="h1">Access Confidential Content</h1>
+    //   {/* <label htmlFor="tokenId">token ID:</label>
+    //     <input
+    //         type="text"
+    //         id="tokenId"
+    //         onChange={e => setTokenId(e.target.value)}
+    //     />
+    //     <label htmlFor="encryptionKey">Encryption key:</label>
+    //     <input
+    //         type="text"
+    //         id="encryptionKey"
+    //         onChange={e => setEncryptionKey(e.target.value)}
+    //     /> */}
+    //   <label htmlFor="tokenId">Confidential content CID:</label>
+    //   <input
+    //     type="text"
+    //     id="CID"
+    //     onChange={(e) => setCidInputField(e.target.value)}
+    //   />
+    //   {/* <button onClick={() => setCid(cidInputField)}>Set CID</button> */}
+    //   {cidInputField !== '' && (
+    //     <button onClick={loadEncryptedFile}>Load encrypted file</button>
+    //   )}
+    //   {loadingError && <div>{loadingError}</div>}
+    //   {cid && encryptedFile && (
+    //     <AccessConfidentialData
+    //       instance={instance}
+    //       cid={cid}
+    //       token={token}
+    //       signerAddress={signerAddress}
+    //       setEncryptionKey={setEncryptionKey}
+    //     />
+    //   )}
+    //   {/* {cid && <button onClick={getContentKey}> getContentKey </button>} */}
+    //   {encryptedFile && encryptionKey !== '' && (
+    //     <button onClick={decryptFile}> Decrypt content </button>
+    //   )}
+    // </div>
   );
 };

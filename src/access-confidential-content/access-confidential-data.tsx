@@ -85,9 +85,25 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
   // }
 
   return (
-    <div>
+    // <div className="p-4 bg-white rounded-md shadow-sm">
+    //   {reencryptedData && (
+    //     <div className="text-gray-800 mb-4">
+    //       Content key:{' '}
+    //       {reencryptedData
+    //         .map((item) => decryptAndCombineEuint32Array(item))
+    //         .join(', ')}
+    //     </div>
+    //   )}
+    //   {isPending && <div className="text-gray-800 mb-4">Loading...</div>}
+    //   {error && (
+    //     <div className="text-red-500">
+    //       Error: {(error as BaseError).details || error.message}
+    //     </div>
+    //   )}
+    // </div>
+    <div className="p-4 bg-white rounded-md shadow-sm">
       {(reencryptedData as string) && (
-        <div>
+        <div className="text-gray-800 mb-4">
           {' '}
           Content key:{' '}
           {decryptAndCombineEuint32Array(reencryptedData as string[]).toString(
@@ -95,9 +111,9 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
           )}{' '}
         </div>
       )}
-      {isPending && <div>Loading...</div>}
+      {isPending && <div className="text-gray-800 mb-4">Loading...</div>}
       {error && (
-        <div>
+        <div className="text-red-500">
           Error: {(error as unknown as BaseError).details || error.message}
         </div>
       )}
