@@ -103,13 +103,21 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
     // </div>
     <div className="p-4 bg-white rounded-md shadow-sm">
       {(reencryptedData as string) && (
-        <div className="text-gray-800 mb-4">
-          {' '}
+        <div className="mt-4 p-4 bg-gray-100 rounded-md text-gray-700">
           Content key:{' '}
-          {decryptAndCombineEuint32Array(reencryptedData as string[]).toString(
-            16,
-          )}{' '}
+          <code className="text-sm text-gray-800 break-words">
+            {decryptAndCombineEuint32Array(
+              reencryptedData as string[],
+            ).toString(16)}
+          </code>
         </div>
+        // <div className="text-gray-800 mb-4">
+        //   {' '}
+        //   Content key:{' '}
+        //   {decryptAndCombineEuint32Array(reencryptedData as string[]).toString(
+        //     16,
+        //   )}{' '}
+        // </div>
       )}
       {isPending && <div className="text-gray-800 mb-4">Loading...</div>}
       {error && (
