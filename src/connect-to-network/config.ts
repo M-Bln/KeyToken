@@ -30,7 +30,7 @@ declare module 'wagmi' {
 //   },
 // });
 
-const inco: Chain = {
+export const inco: Chain = {
   id: 9_090,
   name: 'Inco Gentry Testnet',
   nativeCurrency: {

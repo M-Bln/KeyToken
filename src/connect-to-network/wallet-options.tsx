@@ -1,5 +1,8 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { useAccount, useSwitchChain } from 'wagmi';
 import { Connector, useConnect } from 'wagmi';
+
+import { inco } from './config';
 
 function WalletOption({
   connector,
@@ -46,6 +49,20 @@ export function WalletOptions() {
       ))}
     </div>
   );
+}
+
+export function NetworkSwitcher() {
+  const { isConnected, chain } = useAccount();
+  // const { switchNetwork } = useSwitchAccount();
+  const { switchChain } = useSwitchChain();
+
+  useEffect(() => {
+    if (isConnected && chain && chain.id !== inco.id) {
+      switchChain({ chainId: inco.id });
+    }
+  }, [isConnected, chain, switchChain]);
+
+  return null; // This component doesn't render anything
 }
 
 // import * as React from 'react';

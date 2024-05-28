@@ -5,7 +5,10 @@ import { useAccount, WagmiProvider } from 'wagmi';
 
 import { Account } from './account';
 import { config } from './connect-to-network/config';
-import { WalletOptions } from './connect-to-network/wallet-options';
+import {
+  NetworkSwitcher,
+  WalletOptions,
+} from './connect-to-network/wallet-options';
 window.Buffer = Buffer;
 
 const queryClient = new QueryClient();
@@ -79,6 +82,7 @@ function App() {
             </p>
           </div> */}
           <ConnectWallet />
+          <NetworkSwitcher />
         </div>
       </QueryClientProvider>
     </WagmiProvider>
