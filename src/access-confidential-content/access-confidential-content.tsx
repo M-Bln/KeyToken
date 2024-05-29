@@ -20,28 +20,6 @@ export const AccessConfidentialContent: React.FC<
   const [encryptionKey, setEncryptionKey] = useState<string>('');
   const [loadingError, setLoadingError] = useState<string | null>(null);
 
-  // const loadEncryptedFile = async() => {
-  //     if (cid) {
-  //     try {
-  //             const client = create({url: 'https://gateway.moralisipfs.com/ipfs/'});
-  //             const stream = client.cat(cid);
-  //             let data = new Uint8Array(0);
-
-  //             for await (const chunk of stream) {
-  //                 let tmp = new Uint8Array(data.byteLength + chunk.length);
-  //                 tmp.set(data, 0);
-  //                 tmp.set(chunk, data.byteLength);
-  //                 data = tmp;
-  //             }
-
-  //             console.log('data: ', data);
-  //             setEncryptedFile(data);
-  //         } catch (error) {
-  //             console.error('Error fetching encrypted file', error);
-  //         }
-  //     }
-  // }
-
   const loadEncryptedFile = async () => {
     try {
       setCid(cidInputField);
@@ -164,44 +142,5 @@ export const AccessConfidentialContent: React.FC<
         </button>
       )}
     </div>
-    // <div className="white-rounded">
-    //   <h1 className="h1">Access Confidential Content</h1>
-    //   {/* <label htmlFor="tokenId">token ID:</label>
-    //     <input
-    //         type="text"
-    //         id="tokenId"
-    //         onChange={e => setTokenId(e.target.value)}
-    //     />
-    //     <label htmlFor="encryptionKey">Encryption key:</label>
-    //     <input
-    //         type="text"
-    //         id="encryptionKey"
-    //         onChange={e => setEncryptionKey(e.target.value)}
-    //     /> */}
-    //   <label htmlFor="tokenId">Confidential content CID:</label>
-    //   <input
-    //     type="text"
-    //     id="CID"
-    //     onChange={(e) => setCidInputField(e.target.value)}
-    //   />
-    //   {/* <button onClick={() => setCid(cidInputField)}>Set CID</button> */}
-    //   {cidInputField !== '' && (
-    //     <button onClick={loadEncryptedFile}>Load encrypted file</button>
-    //   )}
-    //   {loadingError && <div>{loadingError}</div>}
-    //   {cid && encryptedFile && (
-    //     <AccessConfidentialData
-    //       instance={instance}
-    //       cid={cid}
-    //       token={token}
-    //       signerAddress={signerAddress}
-    //       setEncryptionKey={setEncryptionKey}
-    //     />
-    //   )}
-    //   {/* {cid && <button onClick={getContentKey}> getContentKey </button>} */}
-    //   {encryptedFile && encryptionKey !== '' && (
-    //     <button onClick={decryptFile}> Decrypt content </button>
-    //   )}
-    // </div>
   );
 };
