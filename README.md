@@ -60,7 +60,7 @@ Token holders can decrypt and access the confidential content by connecting thei
 Clone the repository and install the dependencies:
 
 ```sh
-git clone https://github.com/M-Bln/keytoken.git
+git clone https://github.com/M-Bln/KeyToken.git
 cd keytoken
 npm install
 ```
