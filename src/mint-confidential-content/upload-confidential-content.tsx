@@ -110,7 +110,12 @@ export const UploadConfidentialContent: React.FC<
       </Step>
 
       <Step title="3rd step, Mint Key Token">
-        {fileCid === null && encryptionKey === null && (
+        <MintConfidentialToken
+          instance={instance}
+          fileCid={fileCid}
+          contentEncryptionKey={encryptionKey}
+        />
+        {/* {fileCid === null && encryptionKey === null && (
           <p className="text-gray-600">
             First encrypt the content and provide the CID
           </p>
@@ -121,7 +126,7 @@ export const UploadConfidentialContent: React.FC<
             fileCid={fileCid}
             contentEncryptionKey={encryptionKey}
           />
-        )}
+        )} */}
       </Step>
     </div>
   );

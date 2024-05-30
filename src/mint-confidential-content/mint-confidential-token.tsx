@@ -9,8 +9,8 @@ import { contractAddress } from '../network-config';
 
 interface MintConfidentialTokenProps {
   instance: FhevmInstance;
-  fileCid: string;
-  contentEncryptionKey: bigint;
+  fileCid: string | null;
+  contentEncryptionKey: bigint | null;
 }
 
 export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
@@ -95,9 +95,12 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
     });
 
   return (
-    <form onSubmit={submit} className="p-4 bg-white rounded-md shadow-sm">
-      <div className="mb-4">
-        <label htmlFor="address" className="block text-gray-700 mb-2">
+    <form onSubmit={submit} className="p-4 rounded-md">
+      <div className="mb-4 flex items-center space-x-4">
+        <label
+          htmlFor="address"
+          className="block text-neutral-dark text-lg font-bold mb-2 whitespace-nowrap"
+        >
           Mint to:
         </label>
         <input
@@ -105,11 +108,14 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
           id="address"
           placeholder="0xA0Cf…251e"
           required
-          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="input-field w-full"
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="amount" className="block text-gray-700 mb-2">
+      <div className="mb-4 flex items-center space-x-4">
+        <label
+          htmlFor="amount"
+          className="block text-neutral-dark text-lg font-bold mb-2"
+        >
           Amount to Mint:
         </label>
         <input
@@ -117,20 +123,30 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
           id="amount"
           placeholder="1000"
           required
-          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="input-field flex-grow"
         />
+        <button
+          disabled={isPending || !fileCid || !contentEncryptionKey}
+          type="submit"
+          className="button ml-auto"
+        >
+          {isPending ? 'Confirming...' : 'Mint'}
+        </button>
       </div>
-      <button
-        disabled={isPending || !fileCid || !contentEncryptionKey}
-        type="submit"
-        className={`${
-          isPending || !fileCid || !contentEncryptionKey
-            ? 'bg-gray-300 cursor-not-allowed'
-            : 'bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-500'
-        } text-white px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2`}
-      >
-        {isPending ? 'Confirming...' : 'Mint'}
-      </button>
+      <div className="flex text-negative items-center space-x-4">
+        {contentEncryptionKey === null && (
+          <div>
+            Unknown content encryption key! You need first to encrypt the
+            content
+          </div>
+        )}
+        {!fileCid && contentEncryptionKey !== null && (
+          <div>
+            Unknown CID! <br /> You need first to upload to lighthouse or to
+            manually fill in the CID
+          </div>
+        )}
+      </div>
       {hash && (
         <div className="mt-4 text-green-500">Transaction Hash: {hash}</div>
       )}
@@ -140,7 +156,9 @@ export const MintConfidentialToken: React.FC<MintConfidentialTokenProps> = ({
       {isConfirmed && (
         <div className="mt-4 text-green-500">Transaction confirmed.</div>
       )}
-      {error && <div className="mt-4 text-red-500">Error: {error.message}</div>}
+      {error && (
+        <div className="mt-4 text-negative">Error: {error.message}</div>
+      )}
     </form>
     // <form onSubmit={submit}>
     //   <label>Mint to: </label>

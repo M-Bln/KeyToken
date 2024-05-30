@@ -101,9 +101,74 @@ export const AccessConfidentialContent: React.FC<
 
   return (
     // <//"p-6 bg-white rounded-md shadow-sm"div className= "white-rounded">
-    <div className="white-rounded">
+    <div className="primary-light-rounded">
       {/* <h1 className="text-2xl font-bold text-gray-800 mb-4"> */}
       <h1 className="h1">Access Confidential Content</h1>
+      {/* <form onSubmit={loadEncryptedFile} className="p-4 rounded-md">
+        <div className="mb-4 flex items-center space-x-4">
+          <label
+            htmlFor="CID"
+            className="block text-neutral-dark text-lg font-bold mb-2"
+          >
+            CID:
+          </label>
+          <input
+            type="text"
+            id="CID"
+            onChange={(e) => setCidInputField(e.target.value)}
+            required
+            className="input-field flex-grow"
+          />
+          <button type="submit" className="button ml-auto">
+            Load encrypted file
+          </button>
+        </div>
+        {loadingError && (
+          <div className="text-red-500 mb-4">{loadingError}</div>
+        )}
+      </form> */}
+
+      <div className="mb-4 flex items-center space-x-4">
+        <label
+          htmlFor="CID"
+          className="block text-neutral-dark text-lg font-bold mb-2"
+        >
+          CID:
+        </label>
+        <input
+          type="text"
+          id="CID"
+          onChange={(e) => setCidInputField(e.target.value)}
+          className="input-field flex-grow"
+        />
+        <button
+          disabled={cidInputField === ''}
+          onClick={loadEncryptedFile}
+          className="button ml-auto"
+        >
+          Load encrypted file
+        </button>
+      </div>
+      {loadingError && <div className="text-red-500 mb-4">{loadingError}</div>}
+
+      {cid && encryptedFile && (
+        <AccessConfidentialData
+          instance={instance}
+          cid={cid}
+          token={token}
+          signerAddress={signerAddress}
+          setEncryptionKey={setEncryptionKey}
+        />
+      )}
+      {encryptedFile && encryptionKey !== '' && (
+        <button
+          onClick={decryptFile}
+          className="bg-green-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        >
+          Decrypt content
+        </button>
+      )}
+      {/* 
       <div className="mb-4">
         <label htmlFor="CID" className="block text-gray-700 mb-2">
           Confidential content CID:
@@ -124,6 +189,7 @@ export const AccessConfidentialContent: React.FC<
         </button>
       )}
       {loadingError && <div className="text-red-500 mb-4">{loadingError}</div>}
+
       {cid && encryptedFile && (
         <AccessConfidentialData
           instance={instance}
@@ -140,7 +206,7 @@ export const AccessConfidentialContent: React.FC<
         >
           Decrypt content
         </button>
-      )}
+      )} */}
     </div>
   );
 };

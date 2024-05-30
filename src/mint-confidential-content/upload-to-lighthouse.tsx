@@ -116,7 +116,7 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
         />
       </div>
       {lighthouseApiKey && !fileCid && (
-        <div className="mt-4">
+        <div className="mt-4 flex justify-center">
           <button onClick={uploadEncryptedFile} className="button">
             Upload to Lighthouse
           </button>

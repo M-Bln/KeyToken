@@ -54,9 +54,16 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
         </a>
         .
       </p>
-      <button onClick={downloadEncryptedFile} className="button">
-        Download encrypted file
-      </button>
+      <div className="flex justify-center">
+        <button
+          onClick={downloadEncryptedFile}
+          className="button"
+          disabled={!encryptedFile.length}
+          title={!encryptedFile.length ? 'Encrypt a file first' : ''}
+        >
+          Download encrypted file
+        </button>
+      </div>
       <p className="text-neutral-dark mb-4">
         Put it on your own IPFS node and fill in the CID, it should start with
         Qm.
