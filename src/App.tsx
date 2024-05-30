@@ -61,33 +61,54 @@ function ConnectWallet() {
     // </div>
   );
 }
-
 function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="container mx-auto text-center shadow-lg border-b border-gray-200">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Key Token</h1>
-          <p className="text-gray-600">
-            Your NFTs, now with real value. Access exclusive content securely
-            and privately.
-          </p>
-        </div>
         <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
-          {/* <div className="white-rounded p-6 text-center shadow-md mb-6">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Key Token</h1>
-            <p className="text-gray-600 mb-4">
+          <div className="fixed top-0 w-full bg-white z-50 shadow-md text-center p-4">
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">Key Token</h1>
+            <p className="text-gray-600">
               Your NFTs, now with real value. Access exclusive content securely
               and privately.
             </p>
-          </div> */}
-          <ConnectWallet />
-          <NetworkSwitcher />
+          </div>
+          <div className="pt-24">
+            <ConnectWallet />
+            <NetworkSwitcher />
+          </div>
         </div>
       </QueryClientProvider>
     </WagmiProvider>
   );
 }
+
+// function App() {
+//   return (
+//     <WagmiProvider config={config}>
+//       <QueryClientProvider client={queryClient}>
+//         <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+//           <div className="container mx-auto text-center shadow-lg border-b border-gray-200">
+//             <h1 className="text-4xl font-bold text-gray-800 mb-2">Key Token</h1>
+//             <p className="text-gray-600">
+//               Your NFTs, now with real value. Access exclusive content securely
+//               and privately.
+//             </p>
+//           </div>
+//           {/* <div className="white-rounded p-6 text-center shadow-md mb-6">
+//             <h1 className="text-4xl font-bold text-gray-800 mb-4">Key Token</h1>
+//             <p className="text-gray-600 mb-4">
+//               Your NFTs, now with real value. Access exclusive content securely
+//               and privately.
+//             </p>
+//           </div> */}
+//           <ConnectWallet />
+//           <NetworkSwitcher />
+//         </div>
+//       </QueryClientProvider>
+//     </WagmiProvider>
+//   );
+// }
 
 export default App;
 
