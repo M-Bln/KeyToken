@@ -24,11 +24,12 @@ function WalletOption({
     <button
       disabled={!ready}
       onClick={onClick}
-      className={`text-center py-2 px-4 mb-4 text-white rounded-md shadow-sm transition-all duration-300 ${
-        ready
-          ? 'bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-          : 'bg-gray-300 cursor-not-allowed'
-      }`}
+      className="button button-secondary"
+      // className={`text-center py-2 px-4 mb-4 text-white rounded-md shadow-sm transition-all duration-300 ${
+      //   ready
+      //     ? 'bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+      //     : 'bg-gray-300 cursor-not-allowed'
+      // }`}
     >
       {connector.name}
     </button>

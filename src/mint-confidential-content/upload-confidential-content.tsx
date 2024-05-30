@@ -44,18 +44,19 @@ export const UploadConfidentialContent: React.FC<
   );
 
   return (
-    <div className="white-rounded">
+    <div className="primary-light-rounded">
       {/* <h1 className="text-4xl font-bold text-gray-800 mb-6"> */}
       <h1 className="h1">Mint Confidential Content</h1>
       <Step title="1st step, Encrypt content">
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">
+        <div className="mb-4 text-font-bold text-primary-dark mb-4 space-y-2">
+          {/* <label className="block text-gray-700 mb-2"> */}
+          <label className="font-bold">
             Choose a file to encrypt and upload
           </label>
           <input
             type="file"
             onChange={handleFile}
-            className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="block w-full text-neutral-dark bg-neutral-light p-2 border border-neutral-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
         {fileSelected && !encryptionKey && (
@@ -76,7 +77,7 @@ export const UploadConfidentialContent: React.FC<
         )}
       </Step>
 
-      <Step title="2nd step, Upload confidential content options">
+      <Step title="2nd step, Upload confidential content">
         <Option title="1st option, Upload to your own IPFS node">
           <DelegatedUpload
             encryptedFile={encryptedFile}

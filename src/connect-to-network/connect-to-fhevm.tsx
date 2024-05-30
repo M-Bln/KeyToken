@@ -77,18 +77,22 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
   return (
     <div>
       {!instance && (
-        <div className="white-rounded">
+        <div className="primary-light-rounded">
+          <div className="font-semibold">
+            To interact with the fhEVM you first need to initiate an instance by
+            exchanging keys
+          </div>
           <button
             onClick={createInstance}
             disabled={instance !== null && token === null}
             className="button"
           >
-            Create Fhevm Instance
+            Exchange Keys
           </button>
         </div>
       )}
       {instance && !token && (
-        <div className="white-rounded">
+        <div className="primary-light-rounded">
           Waiting for fhevm instance, require to sign publick key with metamask
         </div>
       )}

@@ -35,7 +35,8 @@ export const DelegatedUpload: React.FC<DelegatedUploadProps> = ({
   };
 
   return (
-    <div className="p-4 bg-white rounded-md shadow-sm">
+    // <div className="p-4 bg-white rounded-md shadow-sm">
+    <div>
       <p className="text-gray-600 mb-4">
         Manage yourself the storing of the content with IPFS. You are then
         responsible to make content available to users.

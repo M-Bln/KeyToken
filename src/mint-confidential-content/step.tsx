@@ -13,14 +13,48 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
   };
 
   return (
-    <div className="border rounded-md shadow-sm mb-4">
+    // <div className="border border-neutral-light rounded-md shadow-sm mb-4">
+    //   <button
+    //     onClick={toggleCollapse}
+    //     className="w-full text-left px-4 py-2 bg-primary-light hover:bg-primary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-light rounded-md"
+    //   >
+    //     {/* Step Title */}
+    //   </button>
+    //   <div
+    //     className={`transition-max-height duration-300 ease-in-out overflow-hidden ${
+    //       isCollapsed ? 'max-h-0' : 'max-h-screen'
+    //     }`}
+    //   >
+    //     <div className="px-4 py-2 bg-neutral-light">{children}</div>
+    //   </div>
+    // </div>
+
+    <div className="border-2 border-neutral-light rounded-lg shadow-sm mb-4 focus:border-secondary-light">
       <button
         onClick={toggleCollapse}
-        className="w-full text-left px-4 py-2 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 rounded-md"
+        className="w-full text-left px-4 py-2 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-light rounded-md"
       >
         <div className="flex justify-between items-center">
-          <span className="text-lg font-medium text-gray-700">{title}</span>
+          <span className="text-lg font-medium text-secondary-light">
+            {title}
+          </span>
           <svg
+            className={`w-5 h-5 transform transition-transform ${
+              isCollapsed ? '' : 'rotate-180'
+            } text-neutral-dark`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+          {/* <svg
             className={`w-5 h-5 transform transition-transform ${
               isCollapsed ? '' : 'rotate-180'
             }`}
@@ -35,7 +69,7 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
               strokeWidth="2"
               d="M19 9l-7 7-7-7"
             ></path>
-          </svg>
+          </svg> */}
         </div>
       </button>
       <div
@@ -43,10 +77,46 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
           isCollapsed ? 'max-h-0' : 'max-h-screen'
         }`}
       >
-        <div className="px-4 py-2">{children}</div>
+        <div className="px-4 py-2 bg-primary-light">{children}</div>
       </div>
     </div>
   );
+
+  // return (
+  //   <div className="border rounded-md shadow-sm mb-4">
+  //     <button
+  //       onClick={toggleCollapse}
+  //       className="w-full text-left px-4 py-2 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 rounded-md"
+  //     >
+  //       <div className="flex justify-between items-center">
+  //         <span className="text-lg font-medium text-gray-700">{title}</span>
+  //         <svg
+  //           className={`w-5 h-5 transform transition-transform ${
+  //             isCollapsed ? '' : 'rotate-180'
+  //           }`}
+  //           fill="none"
+  //           stroke="currentColor"
+  //           viewBox="0 0 24 24"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //         >
+  //           <path
+  //             strokeLinecap="round"
+  //             strokeLinejoin="round"
+  //             strokeWidth="2"
+  //             d="M19 9l-7 7-7-7"
+  //           ></path>
+  //         </svg>
+  //       </div>
+  //     </button>
+  //     <div
+  //       className={`transition-max-height duration-300 ease-in-out overflow-hidden ${
+  //         isCollapsed ? 'max-h-0' : 'max-h-screen'
+  //       }`}
+  //     >
+  //       <div className="px-4 py-2">{children}</div>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default Step;
