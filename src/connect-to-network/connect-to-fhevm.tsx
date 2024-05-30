@@ -77,7 +77,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
   return (
     <div>
       {!instance && (
-        <div className="primary-light-rounded">
+        <div className="primary-light-rounded flex flex-col justify-center items-center">
           <div className="font-semibold">
             To interact with the fhEVM you first need to initiate an instance by
             exchanging keys

@@ -4,12 +4,14 @@ interface FileProps {
   file: Uint8Array;
   setEncryptedFile: (encryptedFile: Uint8Array) => void;
   setEncryptionKey: (encryptionKey: bigint) => void;
+  fileSelected: boolean;
 }
 
 export const EncryptFile: React.FC<FileProps> = ({
   file,
   setEncryptedFile,
   setEncryptionKey,
+  fileSelected,
 }) => {
   const encryptFile = useCallback(async () => {
     // Generate a random encryption key
@@ -48,7 +50,11 @@ export const EncryptFile: React.FC<FileProps> = ({
   }, [file, setEncryptedFile, setEncryptionKey]);
 
   return (
-    <button onClick={encryptFile} className="button">
+    <button
+      onClick={encryptFile}
+      className="button ml-auto"
+      disabled={!fileSelected}
+    >
       Encrypt file
     </button>
   );

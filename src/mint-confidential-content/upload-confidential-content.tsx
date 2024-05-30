@@ -46,26 +46,34 @@ export const UploadConfidentialContent: React.FC<
   return (
     <div className="primary-light-rounded">
       {/* <h1 className="text-4xl font-bold text-gray-800 mb-6"> */}
-      <h1 className="h1">Mint Confidential Content</h1>
+      <h1 className="h1 mb-12">Mint Confidential Content</h1>
       <Step title="1st step, Encrypt content">
-        <div className="mb-4 text-font-bold text-primary-dark mb-4 space-y-2">
+        <div className="text-font-bold text-primary-dark mb-4 space-y-2">
           {/* <label className="block text-gray-700 mb-2"> */}
           <label className="font-bold">
             Choose a file to encrypt and upload
           </label>
-          <input
-            type="file"
-            onChange={handleFile}
-            className="block w-full text-neutral-dark bg-neutral-light p-2 border border-neutral-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary"
-          />
+          <div className="flex items-center space-x-4">
+            <input
+              type="file"
+              onChange={handleFile}
+              className="block flex-grow text-neutral-dark bg-neutral-light p-2 border border-neutral-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary"
+            />
+            <EncryptFile
+              file={file}
+              setEncryptedFile={setEncryptedFile}
+              setEncryptionKey={setEncryptionKey}
+              fileSelected={fileSelected}
+            />
+          </div>
         </div>
-        {fileSelected && !encryptionKey && (
+        {/* {fileSelected && !encryptionKey && (
           <EncryptFile
             file={file}
             setEncryptedFile={setEncryptedFile}
             setEncryptionKey={setEncryptionKey}
           />
-        )}
+        )} */}
         {encryptionKey !== null && (
           <div className="mt-4 p-4 bg-gray-100 rounded-md text-gray-700">
             The file <strong>{fileName}</strong> was encrypted with this private

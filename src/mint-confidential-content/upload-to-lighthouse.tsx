@@ -82,8 +82,8 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
   };
 
   return (
-    <div className="p-4 bg-white rounded-md shadow-sm">
-      <p className="text-gray-600 mb-4">
+    <div>
+      <p className="text-neutral-dark mb-4">
         Then you rely on a third party for storing and availability of content.
         Lighthouse offers free limited storage. It requires only a crypto wallet
         to login and to obtain an API key at{' '}
@@ -91,25 +91,28 @@ export const UploadToLighthouse: React.FC<UploadToLighthouseProps> = ({
           href="https://www.lighthouse.storage/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-indigo-500 underline hover:text-indigo-700"
+          className="http-link"
         >
           Lighthouse Storage
         </a>
         .
       </p>
-      <p className="text-gray-600 mb-4">
+      <p className="text-neutral-dark mb-4">
         You can then later buy storage on the FileCoin network for a
         decentralized approach.
       </p>
-      <div className="mb-4">
-        <label htmlFor="lighthouseApiKey" className="block text-gray-700 mb-2">
+      <div className="mb-4 flex items-center space-x-4">
+        <label
+          htmlFor="lighthouseApiKey"
+          className="block text-neutral-dark text-lg font-bold mb-2 whitespace-nowrap"
+        >
           Lighthouse API Key:
         </label>
         <input
           type="text"
           id="lighthouseApiKey"
           onChange={(e) => setLighthouseApiKey(e.target.value)}
-          className="block w-full text-gray-600 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="input-field w-full"
         />
       </div>
       {lighthouseApiKey && !fileCid && (
