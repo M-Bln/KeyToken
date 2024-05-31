@@ -3,6 +3,7 @@ import { FhevmInstance } from 'fhevmjs';
 import React, { useState } from 'react';
 
 import { AccessConfidentialContent } from '../access-confidential-content/access-confidential-content';
+import key from '../key.svg';
 import { UploadConfidentialContent } from '../mint-confidential-content/upload-confidential-content';
 import { contractAddress } from '../network-config';
 
@@ -77,25 +78,73 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
   return (
     <div>
       {!instance && (
-        <div className="primary-light-rounded flex flex-col justify-center items-center">
-          <div className="font-semibold">
-            To interact with the fhEVM you first need to initiate an instance by
-            exchanging keys
+        <div className="flex justify-center items-center space-x-8">
+          <div className="animate-fade-in-down">
+            <div
+              className="w-48 h-48 bg-cover bg-no-repeat"
+              style={{
+                backgroundImage: `url(${key})`,
+                transform: 'scaleX(-1) rotate(90deg)', // set the SVG as a background image
+                // backgroundSize: 'cover', // make the image cover the entire page
+                // backgroundRepeat: 'no-repeat', // prevent the image from repeating
+              }}
+            ></div>
           </div>
-          <button
-            onClick={createInstance}
-            disabled={instance !== null && token === null}
-            className="button"
-          >
-            Exchange Keys
-          </button>
+          {/* <div
+            className={`primary-light-rounded flex flex-col justify-center items-center transition-opacity duration-500 ease-in-out ${
+              showContent ? 'opacity-100' : 'opacity-0'
+            }`}
+          > */}
+          <div className="primary-light-rounded flex flex-col justify-center items-center opacity-0 animate-fade-in">
+            <div className="font-semibold">
+              To interact with the fhEVM you first need to initiate an instance
+              by exchanging keys
+            </div>
+            <button
+              onClick={createInstance}
+              disabled={instance !== null && token === null}
+              className="button"
+            >
+              Exchange Keys
+            </button>
+          </div>
+          <div
+            className="w-48 h-48 bg-cover bg-no-repeat animate-fade-in-up"
+            style={{
+              backgroundImage: `url(${key})`, // set the SVG as a background image
+              // backgroundSize: 'cover', // make the image cover the entire page
+              // backgroundRepeat: 'no-repeat', // prevent the image from repeating
+            }}
+          ></div>
         </div>
       )}
       {instance && !token && (
+        <div className="flex justify-center items-center space-x-8">
+          <div className="animate-left-key">
+            <div
+              className="w-48 h-48 bg-cover bg-no-repeat"
+              style={{
+                backgroundImage: `url(${key})`,
+                transform: 'scaleX(-1) rotate(90deg)',
+              }}
+            ></div>
+          </div>
+          <div className="primary-light-rounded opacity-0 animate-fade-in">
+            Waiting for fhevm instance, require to sign public key with metamask
+          </div>
+          <div
+            className="w-48 h-48 bg-cover bg-no-repeat animate-right-key"
+            style={{
+              backgroundImage: `url(${key})`,
+            }}
+          ></div>
+        </div>
+      )}
+      {/* {instance && !token && (
         <div className="primary-light-rounded">
           Waiting for fhevm instance, require to sign publick key with metamask
         </div>
-      )}
+      )} */}
       {instance && token && <UploadConfidentialContent instance={instance} />}
       {instance && signerAddress && token && (
         <AccessConfidentialContent
