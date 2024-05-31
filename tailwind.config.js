@@ -32,6 +32,9 @@ module.exports = {
           dark: '#B91C1C',
         },
       },
+      boxShadow: {
+        'inner-lg': 'inset 0 4px 12px 0 rgba(0, 0, 0, 0.6)',
+      },
     },
   },
   variants: {

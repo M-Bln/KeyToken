@@ -10,6 +10,7 @@ import {
   NetworkSwitcher,
   WalletOptions,
 } from './connect-to-network/wallet-options';
+import topography from './topography.svg';
 window.Buffer = Buffer;
 
 const queryClient = new QueryClient();
@@ -89,7 +90,14 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-neutral-light flex flex-col items-center justify-center">
+        <div
+          className="min-h-screen bg-neutral-light flex flex-col items-center justify-center"
+          style={{
+            backgroundImage: `url(${topography})`, // set the SVG as a background image
+            backgroundSize: 'cover', // make the image cover the entire page
+            backgroundRepeat: 'no-repeat', // prevent the image from repeating
+          }}
+        >
           <div className="fixed top-0 w-full bg-primary z-50 shadow-md grid grid-cols-3 p-4">
             <div></div> {/* Empty div for the first column */}
             <div className="col-start-2 col-end-3 text-center">

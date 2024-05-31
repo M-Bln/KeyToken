@@ -31,7 +31,10 @@
 }
 
 .button {
-  @apply bg-secondary text-white px-4 py-2 rounded-md shadow-sm hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  @apply bg-secondary text-white px-4 py-2 rounded-md shadow-sm border-2 
+  border-secondary-dark hover:bg-secondary-dark hover:border-secondary
+   focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:border-0
+   focus:ring-offset-primary-light focus:hover:ring-secondary-dark;
 }
 
 .button-primary {
@@ -47,7 +50,10 @@
 }
 
 .button-negative {
-  @apply bg-negative text-white hover:bg-negative-dark;
+  @apply bg-negative text-white px-4 py-2 rounded-md shadow-sm border-2 
+  border-negative-dark hover:bg-negative-dark hover:border-negative
+   focus:outline-none focus:ring-2 focus:ring-negative focus:ring-offset-2 focus:border-0
+   focus:ring-offset-primary-dark focus:hover:ring-negative-dark;
 }
 
 .button-neutral {
@@ -67,7 +73,7 @@
 }
 
 .primary-light-rounded {
-  @apply bg-primary-light rounded-lg shadow-md max-w-3xl mt-6 p-6 shadow-md text-primary-dark mb-4 space-y-6;
+  @apply bg-primary-light rounded-lg shadow-md max-w-3xl mt-6 p-6 shadow-md text-primary-dark mb-4 space-y-6 border-2 border-secondary;
 }
 
 .primary-light-rounded-no-space {

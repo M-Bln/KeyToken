@@ -31,7 +31,7 @@ export function Account() {
       {provider && signer && (
         <ConnectToFhevm provider={provider} signer={signer} />
       )}
-      <div className="fixed bottom-0 left-0 right-0 bg-primary-dark text-sm text-neutral-light py-2 px-6 flex items-center justify-between shadow-inner">
+      <div className="fixed bottom-0 left-0 right-0 bg-primary-dark text-sm text-neutral-light py-2 px-6 flex items-center justify-between shadow-inner-lg">
         <div>
           <p>You are connected as:</p>
           {address && (
@@ -68,17 +68,14 @@ export function Account() {
             </div>
           )}
         </div>
-        <button
-          className="bg-negative text-neutral-light px-4 py-2 rounded hover:bg-negative-dark transition duration-150"
-          onClick={() => disconnect()}
-        >
+        <button className="button-negative" onClick={() => disconnect()}>
           Disconnect
         </button>
       </div>
     </div>
   );
 
-  // return (
+  // return (  "bg-negative text-neutral-light px-4 py-2 rounded hover:bg-negative-dark transition duration-150"
   //   <div className="pb-20">
   //     {ensAvatar && <img alt="ENS Avatar" src={ensAvatar} />}
   //     {provider && signer && (
