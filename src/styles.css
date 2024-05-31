@@ -31,9 +31,10 @@
 }
 
 .button {
-  @apply bg-secondary text-white px-4 py-2 rounded-md shadow-sm border-2 
+  @apply bg-secondary text-white px-4 py-2 rounded-md shadow-sm border-2
+  /* outline-none ring-2 ring-transparent ring-offset-2 ring-offset-transparent */
   border-secondary-dark hover:bg-secondary-dark hover:border-secondary
-   focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:border-0
+   focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:border-transparent
    focus:ring-offset-primary-light focus:hover:ring-secondary-dark;
 }
 

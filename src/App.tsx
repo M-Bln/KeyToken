@@ -125,7 +125,7 @@ function App() {
             </div>
             <ChestIcon className="w-24 h-24 mr-2 ml-auto" />
           </div> */}
-          <div className="pt-24 flex flex-col items-center">
+          <div className="pt-28 flex flex-col items-center">
             <ConnectWallet />
             <NetworkSwitcher />
           </div>
