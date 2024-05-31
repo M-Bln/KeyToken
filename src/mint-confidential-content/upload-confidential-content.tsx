@@ -46,7 +46,9 @@ export const UploadConfidentialContent: React.FC<
   return (
     <div className="primary-light-rounded">
       {/* <h1 className="text-4xl font-bold text-gray-800 mb-6"> */}
-      <h1 className="h1 mb-12">Mint Confidential Content</h1>
+      <h1 className="h1 mb-12 border-b-2 border-primary-dark">
+        Mint Confidential Content
+      </h1>
       <Step title="1st step, Encrypt content">
         <div className="text-font-bold text-primary-dark mb-4 space-y-2">
           {/* <label className="block text-gray-700 mb-2"> */}

@@ -101,16 +101,23 @@ export const AccessConfidentialData: React.FC<AccessConfidentialDataProps> = ({
     //     </div>
     //   )}
     // </div>
-    <div className="p-4 bg-white rounded-md shadow-sm">
+    <div className="p-4">
       {(reencryptedData as string) && (
         <div className="mt-4 p-4 bg-gray-100 rounded-md text-gray-700">
-          Content key:{' '}
+          <strong>Content key:</strong>{' '}
           <code className="text-sm text-gray-800 break-words">
             {decryptAndCombineEuint32Array(
               reencryptedData as string[],
             ).toString(16)}
           </code>
         </div>
+        //   <div className="mt-4 p-4 bg-gray-100 rounded-md text-gray-700">
+        //   The file <strong>{fileName}</strong> was encrypted with this private
+        //   key:
+        //   <code className="block mt-2 text-sm text-gray-800 break-words">
+        //     {encryptionKey.toString(16)}
+        //   </code>
+        // </div>
         // <div className="text-gray-800 mb-4">
         //   {' '}
         //   Content key:{' '}
