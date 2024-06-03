@@ -26,23 +26,17 @@ export const AccessConfidentialContent: React.FC<
       const response = await fetch(
         `https://cloudflare-ipfs.com/ipfs/${cidInputField}`,
       );
-      //const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
-      console.log('response: ', response);
+
       const data = await response.arrayBuffer();
-      console.log('data: ', data);
       const fileAsUint8Array = new Uint8Array(data);
-      console.log('file as Uint8Array: ', fileAsUint8Array);
       setEncryptedFile(fileAsUint8Array);
       setLoadingError(null);
     } catch (error) {
       setLoadingError('Error fetching encrypted file' + (error as string));
-      //console.error('Error fetching encrypted file', error);
     }
   };
 
   const decryptFile = async () => {
-    console.log('encrypted file: ', encryptedFile);
-    console.log('encryption key: ', encryptionKey);
     if (encryptedFile && encryptionKey.length > 0) {
       // Convert the encryption key back to a Uint8Array
       const key = new Uint8Array(
@@ -52,10 +46,8 @@ export const AccessConfidentialContent: React.FC<
       );
       console.log('get key: ', key);
       // Decrypt the file
-      const iv = encryptedFile.slice(0, 12); // Assuming the iv is the first 12 bytes of the encrypted file
-      console.log('get iv: ', iv);
+      const iv = encryptedFile.slice(0, 12);
       const data = encryptedFile.slice(12);
-      console.log('get encrypted data: ', data);
       const cryptoKey = await window.crypto.subtle.importKey(
         'raw',
         key,
@@ -69,9 +61,6 @@ export const AccessConfidentialContent: React.FC<
         data,
       );
       const decryptedFileAsUint8Array = new Uint8Array(decryptedFile);
-      console.log('decrypted file: ', decryptedFileAsUint8Array);
-      // Convert the decrypted file to a Uint8Array and set the clearFile state
-      // setClearFile(decryptedFileAsUint8Array);
 
       // Create a Blob from the decrypted file
       const blob = new Blob([decryptedFileAsUint8Array]);
@@ -104,9 +93,6 @@ export const AccessConfidentialContent: React.FC<
       <h1 className="h1 mb-0 border-b-2 border-primary-dark">
         Access Confidential Content
       </h1>
-      {/* <div className="-mt-4 mb-4">
-        <hr className="border-primary-dark border-t-2" />
-      </div> */}
 
       <div className="mb-4 flex items-center space-x-4">
         <label
