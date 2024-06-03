@@ -98,7 +98,7 @@ function App() {
             backgroundRepeat: 'no-repeat', // prevent the image from repeating
           }}
         >
-          <div className="fixed top-0 w-full bg-primary z-50 shadow-md grid grid-cols-3 p-4">
+          <div className="fixed top-0 w-full bg-primary z-50 shadow-md grid grid-cols-3 p-4  border-b-2 border-secondary ">
             <div></div> {/* Empty div for the first column */}
             <div className="col-start-2 col-end-3 text-center">
               <h1 className="text-4xl font-bold text-neutral-light mb-2">

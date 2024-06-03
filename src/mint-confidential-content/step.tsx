@@ -29,7 +29,7 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
     //   </div>
     // </div>
 
-    <div className="border-2 border-neutral-light rounded-lg shadow-sm mb-12 focus:border-secondary-light">
+    <div className="border-2 border-secondary-light rounded-lg shadow-sm mb-12 focus:border-secondary-light">
       <button
         onClick={toggleCollapse}
         className="w-full text-left px-4 py-2 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-light rounded-md"
@@ -41,7 +41,7 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
           <svg
             className={`w-5 h-5 transform transition-transform ${
               isCollapsed ? '' : 'rotate-180'
-            } text-neutral-dark`}
+            } text-primary-light`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
