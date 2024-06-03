@@ -68,13 +68,6 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
     }
   };
 
-  // useEffect(() => {
-  //     import('./create-fhevm-instance').then(async ({ createFhevmInstance }) => {
-  //         const newInstance = createFhevmInstance(contractAddress, signer, provider);
-  //         setInstance(await newInstance);
-  //     });
-  // }, [provider, signer]);
-
   return (
     <div>
       {!instance && (
@@ -84,17 +77,10 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
               className="w-48 h-48 bg-cover bg-no-repeat"
               style={{
                 backgroundImage: `url(${key})`,
-                transform: 'scaleX(-1) rotate(90deg)', // set the SVG as a background image
-                // backgroundSize: 'cover', // make the image cover the entire page
-                // backgroundRepeat: 'no-repeat', // prevent the image from repeating
+                transform: 'scaleX(-1) rotate(90deg)',
               }}
             ></div>
           </div>
-          {/* <div
-            className={`primary-light-rounded flex flex-col justify-center items-center transition-opacity duration-500 ease-in-out ${
-              showContent ? 'opacity-100' : 'opacity-0'
-            }`}
-          > */}
           <div className="primary-light-rounded flex flex-col justify-center items-center opacity-0 animate-fade-in">
             <div className="font-semibold">
               To interact with the fhEVM you first need to initiate an instance
@@ -111,9 +97,7 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
           <div
             className="w-48 h-48 bg-cover bg-no-repeat animate-fade-in-up"
             style={{
-              backgroundImage: `url(${key})`, // set the SVG as a background image
-              // backgroundSize: 'cover', // make the image cover the entire page
-              // backgroundRepeat: 'no-repeat', // prevent the image from repeating
+              backgroundImage: `url(${key})`,
             }}
           ></div>
         </div>
@@ -140,11 +124,6 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
           ></div>
         </div>
       )}
-      {/* {instance && !token && (
-        <div className="primary-light-rounded">
-          Waiting for fhevm instance, require to sign publick key with metamask
-        </div>
-      )} */}
       {instance && token && <UploadConfidentialContent instance={instance} />}
       {instance && signerAddress && token && (
         <AccessConfidentialContent
@@ -153,31 +132,6 @@ export const ConnectToFhevm: React.FC<ConnectToFhevmProps> = ({
           token={token}
         />
       )}
-      {/* {instance && token && <MintNFT instance={instance} />}
-            {instance && token && <AskConfidentialData instance={instance} publicKey={token.publicKey} signature={token.signature} signer={signer} />} */}
     </div>
   );
-  //           {instance && token && <AccessConfidentialData instance={instance} tokenId={"5"}
-  // publicKey={token.publicKey} signature={token.signature} signerAddress={`0xf0A5B532fc2A5D8E324Cc2D7c61DBFdC100D391e`}/>}
-  //             {instance && <AccessConfidentialData instance={instance} />}
-  //             {instance && <AccessConfidentialData instance={instance} />}
-  // if (instance) {
-  //     return (
-  //         <MintNFT instance={instance}/>
-  //         <AccessConfidentialData instance={instance}/>
-  //     );
-  // } else {
-  //     return(
-  //         <div>Failed to initiate instance</div>
-  //     )
-  // }
-  // if (instance) {
-  //     return (
-  //         <MintNFT instance={instance}/>
-  //     );
-  // } else {
-  //     return(
-  //         {provider && signer && <ConnectToFhevm provider={provider}  signer={signer} />}
-  //     )
-  // }
 };
