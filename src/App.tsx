@@ -31,7 +31,7 @@ function ConnectWallet() {
             href="https://docs.inco.org/getting-started/connect-metamask"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-dark hover:underline ml-1"
+            className="text-accent hover:underline ml-1"
           >
             Add Inco Gentry Testnet to your wallet
           </a>
@@ -42,7 +42,7 @@ function ConnectWallet() {
             href="https://docs.inco.org/getting-started/faucet"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-dark hover:underline ml-1"
+            className="text-accent hover:underline ml-1"
           >
             Faucet
           </a>
@@ -56,35 +56,6 @@ function ConnectWallet() {
     </div>
   );
 }
-
-// function App() {
-//   return (
-//     <WagmiProvider config={config}>
-//       <QueryClientProvider client={queryClient}>
-//         <div className="min-h-screen bg-neutral-light flex flex-col items-center justify-center">
-//           <div className="fixed top-0 w-full bg-primary z-50 shadow-md text-center p-4 relative">
-//             <div className="absolute inset-0 flex items-center justify-center">
-//               <ChestIcon className="w-24 h-24 opacity-10" />
-//             </div>
-//             <div className="relative">
-//               <h1 className="text-4xl font-bold text-neutral-light mb-2">
-//                 Key Token
-//               </h1>
-//               <p className="text-neutral-light">
-//                 Your NFTs, now with real value. Access exclusive content
-//                 securely and privately.
-//               </p>
-//             </div>
-//           </div>
-//           <div className="pt-24 flex flex-col items-center">
-//             <ConnectWallet />
-//             <NetworkSwitcher />
-//           </div>
-//         </div>
-//       </QueryClientProvider>
-//     </WagmiProvider>
-//   );
-// }
 
 function App() {
   return (
