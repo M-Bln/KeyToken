@@ -1270,11 +1270,6 @@ video {
   text-decoration-line: underline;
 }
 
-.focus\:border-secondary-light:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 215 0 / var(--tw-border-opacity));
-}
-
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;

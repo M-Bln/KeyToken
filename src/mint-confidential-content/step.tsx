@@ -13,7 +13,7 @@ const Step: React.FC<StepProps> = ({ title, children }) => {
   };
 
   return (
-    <div className="border-2 border-secondary-light rounded-lg shadow-sm mb-12 focus:border-secondary-light">
+    <div className="border-2 border-secondary-light rounded-lg shadow-sm mb-12">
       <button
         onClick={toggleCollapse}
         className="w-full text-left px-4 py-2 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-light rounded-md"

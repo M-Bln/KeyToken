@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useAccount, WagmiProvider } from 'wagmi';
 
 import { Account } from './account';
+import banner from './graphic.svg';
 import { ReactComponent as ChestIcon } from './chest-key.svg';
 import { config } from './connect-to-network/config';
 import {
@@ -69,7 +70,14 @@ function App() {
             backgroundRepeat: 'no-repeat', // prevent the image from repeating
           }}
         >
-          <div className="fixed top-0 w-full bg-primary z-50 shadow-md grid grid-cols-3 p-4  border-b-2 border-secondary ">
+          <div
+            className="fixed top-0 w-full bg-primary z-50 shadow-md grid grid-cols-3 p-4  border-b-2 border-secondary "
+            style={{
+              backgroundImage: `url(${banner})`, // set the PNG as a background image
+              backgroundSize: 'cover', // make the image cover the entire div
+              backgroundRepeat: 'no-repeat', // prevent the image from repeating
+            }}
+          >
             <div></div> {/* Empty div for the first column */}
             <div className="col-start-2 col-end-3 text-center">
               <h1 className="text-4xl font-bold text-neutral-light mb-2">
