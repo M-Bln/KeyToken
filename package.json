@@ -7,7 +7,7 @@
     "start": "webpack-dev-server .",
     "build": "webpack .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d public",
     "test": "test"
   },
   "homepage": "https://M-Bln.github.io/KeyToken",
