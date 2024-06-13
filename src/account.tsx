@@ -53,7 +53,7 @@ export function Account() {
           </p>
           {!(chain && chain.id === inco.id) && (
             <div className="text-negative-light">
-              <p>
+              <p className="text-2xl text-negative">
                 You are not connected to the right network, switch to Inco
                 Gentry Testnet!
               </p>
